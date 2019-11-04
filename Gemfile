@@ -40,6 +40,11 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+
+  # Adds model attributes/routes to top of model files/routes file
+  gem 'annotate'
+  # Allows local variable inspection with <% require 'pry'; binding.pry %>
+  gem 'pry'
 end
 
 group :test do
@@ -52,3 +57,12 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+# Disconnects all connections to Postgres db when running rails db:reset
+gem 'pgreset', '~> 0.1.1'
+# Override partial path for specific view only
+gem 'partial_path_customizer'
+# CSS autoprefixer. Webpack version does not work for asset pipeline files
+gem 'autoprefixer-rails'
+# Authentication
+gem 'devise'
