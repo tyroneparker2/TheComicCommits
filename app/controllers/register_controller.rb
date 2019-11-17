@@ -12,11 +12,11 @@ class RegisterController < ApplicationController
         respond_to do |format|
           format.html {
             if user.save
-              flash[:success] = "Account saved successfully"
+              flash[:success] = "Account was created"
               session[:user_id] = user.id
               redirect_to profile_path
             else
-              flash.now[:error] = "Account could not be saved"
+              flash.now[:error] = "Account could not be created"
               render :new_user, locals: { user: user }
             end
           }

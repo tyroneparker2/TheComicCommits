@@ -18,8 +18,8 @@
 
 one:
   acc_type: MyString
-  resaon: MyString
+  reason: MyString
 
 two:
   acc_type: MyString
-  resaon: MyString
+  reason: MyString

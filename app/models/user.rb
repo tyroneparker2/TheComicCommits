@@ -18,4 +18,7 @@
 
 class User < ApplicationRecord 
     validates :username, :password, :email, presence: true
+    has_many :posts, dependent: :destroy
+    has_many :comics, dependent: :destroy
+    has_many :requests, dependent: :destroy
 end

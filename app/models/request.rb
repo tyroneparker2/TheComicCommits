@@ -15,5 +15,6 @@
 #
 
 class Request < ApplicationRecord
-    validates :acc_type, :resaon, presence: true
+    belongs_to :user
+    validates :acc_type, :reason, presence: true
 end

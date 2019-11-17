@@ -44,7 +44,7 @@ class SessionController < ApplicationController
 
   def new_request
     request = Request.new(params.require(:request).permit(:acc_type, :reason))
-    request.user_id = current_user.user_id
+    request.user_id = current_user.id
     respond_to do |format|
       format.html {
         if request.save
@@ -63,6 +63,30 @@ class SessionController < ApplicationController
     respond_to do |format|
       format.html { render :promote, locals: { requests: requests } }
     end
+  end
+
+  def promote_user
+    response = params[:answer]
+    requests = Request.all
+    request = Request.find(params[:request_id])
+    respond_to do |format|
+      format.html {
+        if response == 'accept'
+          user = User.find(params[:id])
+          user.update(group: params[:acc_type])
+          request.destroy
+          requests = Request.all
+          render :promote, locals: { requests: requests }
+        elsif response == 'decline'
+          request.destroy
+          requests = Request.all 
+          render :promote, locals: { requests: requests }
+        else 
+          flash.now[:error] = "Have to Accept or Decline"
+          render :promote, locals: { requests: requests }
+        end 
+      }
+    end  
   end
 
 end
