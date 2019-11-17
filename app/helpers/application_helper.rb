@@ -8,5 +8,5 @@ module ApplicationHelper
           "warn" => "alert alert-warning"
         }
         bootstrap_alert_class[level]
-      end    
+    end    
 end

@@ -1,0 +1,24 @@
+<h1 class="text-center">Login to Comic Commits</h1>
+
+<div class="container">
+<div class="row justify-content-center">
+
+<%= form_with url: session_create_path, method: :post, local: true do |form| %>
+
+   <div>
+      <%= form.label :username %><br>
+      <%= form.text_field :username %>
+   </div> 
+
+   <div>  
+      <%= form.label :password %><br>
+      <%= form.text_field :password %>
+   </div><br>
+
+<%= form.submit "Sign In" %>
+<%= link_to "Forgot password", login_path %><br>
+<%= 'Not a member?' %>
+<%= link_to "Sign Up", new_user_path %>
+<% end %>
+</div>
+</div>
