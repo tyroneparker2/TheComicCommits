@@ -1,0 +1,30 @@
+<h1 class="text-center">Requests to be Upgraded</h1>
+
+<div class="container">
+<div class="row justify-content-center">
+
+<% requests.each do |request| %>
+    <%= form_with url: new_request_path, method: :post, local: true do |form| %>
+        <table class="border border-primary" style="width:150%">
+            <tr>
+                <th class="text-center">Wants to be a <%= request.acc_type%></th>
+            </tr>
+            <tr>
+                <td class="text-center">Reason:</td>
+            </tr>
+            <tr>
+                <td class="border border-dark"><%= request.resaon %></td>
+            </tr>
+        </table>
+        <div >
+            <%= form.submit "Submit" %>
+            <%= link_to "Go Back", profile_path %>
+            <%= form.radio_button :answer, 'accept' %>
+            <%= form.label :type_accept, "Accept" %>
+            <%= form.radio_button :answer, 'decline' %>
+            <%= form.label :type_decline, "Decline" %>
+        </div>
+   <% end %>
+<% end %>
+</div>
+</div>

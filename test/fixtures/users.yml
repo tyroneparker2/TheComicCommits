@@ -12,8 +12,9 @@
 #  bio             :string
 #  recommendations :string
 #  admin_code      :string
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
+#  form       :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
 #
 
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
@@ -28,6 +29,7 @@ one:
   bio: MyString
   recommendations: MyString
   admin_code: MyString
+  form: MyString
 
 two:
   type: 
@@ -39,3 +41,4 @@ two:
   bio: MyString
   recommendations: MyString
   admin_code: MyString
+  form: MyString
