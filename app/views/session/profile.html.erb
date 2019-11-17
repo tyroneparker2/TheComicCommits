@@ -14,11 +14,11 @@
         <%= current_user.username %>
       </a>
       <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-        <% if current_user.form=='admin' %>
+        <% if current_user.group=='admin' %>
           <a class="dropdown-item" href="promote">Requests</a>
-        <% elsif current_user.form=='creator' %>
+        <% elsif current_user.group=='creator' %>
             <a class="dropdown-item" href="#">Comic</a>
-        <% elsif current_user.form=='critic' %>
+        <% elsif current_user.group=='critic' %>
             <a class="dropdown-item" href="#">Review</a>
         <% else %>  
           <a class="dropdown-item" href="upgrade">Upgrade</a>

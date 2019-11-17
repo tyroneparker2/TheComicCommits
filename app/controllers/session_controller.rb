@@ -43,7 +43,8 @@ class SessionController < ApplicationController
   end
 
   def new_request
-    request = Request.new(params.require(:request).permit(:acc_type, :resaon))
+    request = Request.new(params.require(:request).permit(:acc_type, :reason))
+    request.user_id = current_user.user_id
     respond_to do |format|
       format.html {
         if request.save

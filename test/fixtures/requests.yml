@@ -4,9 +4,14 @@
 #
 #  id         :integer          not null, primary key
 #  acc_type   :string
-#  resaon     :string
+#  reason     :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  user_id    :integer
+#
+# Indexes
+#
+#  index_requests_on_user_id  (user_id)
 #
 
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

@@ -23,13 +23,13 @@
       <% end %>
    </div> 
 
-   <% invalid = request.errors.include?(:resaon) %>
+   <% invalid = request.errors.include?(:reason) %>
    <div class="form-group">  
       <p class="text-center"><%= form.label :resaon %><p>
-      <%= form.text_area :resaon, size: '60x5', class: "form-control #{'border-danger' if invalid}" %>
+      <%= form.text_area :reason, size: '60x5', class: "form-control #{'border-danger' if invalid}" %>
       <% if invalid %>
          <div class="small">
-            <% request.errors.full_messages_for(:resaon).each do |error_message|%>
+            <% request.errors.full_messages_for(:reason).each do |error_message|%>
                <%= error_message %>
             <% end %>
          </div>

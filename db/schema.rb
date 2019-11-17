@@ -37,15 +37,19 @@ ActiveRecord::Schema.define(version: 2019_11_16_033713) do
     t.bigint "user_id"
     t.index ["comic_id"], name: "index_posts_on_comic_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
   create_table "requests", force: :cascade do |t|
     t.string "acc_type"
-    t.string "resaon"
+    t.string "reason"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_requests_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "type"
+    t.string "group"
     t.string "username"
     t.string "email"
     t.string "password"
@@ -54,7 +58,6 @@ ActiveRecord::Schema.define(version: 2019_11_16_033713) do
     t.string "bio"
     t.string "recommendations"
     t.string "admin_code"
-    t.string "form"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -62,4 +65,5 @@ ActiveRecord::Schema.define(version: 2019_11_16_033713) do
   add_foreign_key "comics", "users"
   add_foreign_key "posts", "comics"
   add_foreign_key "posts", "users"
+  add_foreign_key "requests", "users"
 end
