@@ -3,7 +3,7 @@
 # Table name: users
 #
 #  id              :integer          not null, primary key
-#  type            :string
+#  group           :string
 #  username        :string
 #  email           :string
 #  password        :string
@@ -19,7 +19,7 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  type: 
+  group: fan
   username: MyString
   email: MyString
   password: MyString
@@ -28,9 +28,10 @@ one:
   bio: MyString
   recommendations: MyString
   admin_code: MyString
+  form: MyString
 
 two:
-  type: 
+  group: fan
   username: MyString
   email: MyString
   password: MyString
@@ -39,3 +40,4 @@ two:
   bio: MyString
   recommendations: MyString
   admin_code: MyString
+  form: MyString
