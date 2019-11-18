@@ -3,7 +3,7 @@
 # Table name: users
 #
 #  id              :integer          not null, primary key
-#  type            :string
+#  group           :string
 #  username        :string
 #  email           :string
 #  password        :string
@@ -16,7 +16,9 @@
 #  updated_at      :datetime         not null
 #
 
-class User < ApplicationRecord
-    has_many :comics, dependent: :destroy
+class User < ApplicationRecord 
+    validates :username, :password, :email, presence: true
     has_many :posts, dependent: :destroy
+    has_many :comics, dependent: :destroy
+    has_many :requests, dependent: :destroy
 end

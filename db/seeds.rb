@@ -43,9 +43,15 @@ security_q: 'What is your favorite animal?', security_a: 'Bee', bio: 'I like mak
 recommendations: 'nil', admin_code: 'nil')
 =end
 
-
+=begin
 
 comic_3 = creator1.comics.create!( title: 'Mutiny', comic_file: 'Mutiny.png', isbn: '35-2232-323-1', genre: "Action", user_id: 1)
 comic_4 = creator2.comics.create!(title: 'Amazing Ghost Stories', comic_file: 'ags.png', isbn: '34-3302-323', genre: "Horror", user_id: 2)
 comic_2 = creator3.create!(title: 'After Dark', comic_file: 'AfterDark.png', isbn: '10-892-4203', genre: "Crime", user_id: 3)
 
+#comic_2 = Comic.create!(user: creator1, title: 'SpatMan', comic_file: 'file.pdf', isbn: '35-23232-323', genre: "Action")
+#review_1 = Review.create!(user: critic1, comic: comic1, text: 'Amazing comic', rating: 5, replied_to: nil)
+q1 = User.create!(username: 'admin', password: 'admin', email: 'admin', group: 'admin')
+q2 = User.create!(username: 'test', password: 'test', email: 'test', group: 'fan')
+
+=end
