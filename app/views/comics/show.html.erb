@@ -1,0 +1,10 @@
+<p><%= comic.title %></p>
+
+<ul>
+  <% 
+  comicInfo = [comic.isbn, comic.genre]
+  comicInfo.each do |i|
+  %>
+    <li> <%= i %> </li>
+  <% end %>
+</ul>

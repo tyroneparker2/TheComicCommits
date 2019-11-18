@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_14_002427) do
+ActiveRecord::Schema.define(version: 2019_11_14_234215) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,15 @@ ActiveRecord::Schema.define(version: 2019_11_14_002427) do
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
+  create_table "requests", force: :cascade do |t|
+    t.string "acc_type"
+    t.text "reason"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_requests_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "type"
     t.string "username"
@@ -56,4 +65,5 @@ ActiveRecord::Schema.define(version: 2019_11_14_002427) do
   add_foreign_key "comics", "users"
   add_foreign_key "posts", "comics"
   add_foreign_key "posts", "users"
+  add_foreign_key "requests", "users"
 end
