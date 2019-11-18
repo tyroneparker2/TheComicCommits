@@ -1,0 +1,55 @@
+<h1 class="text-center">Sign Up for Comic Commits</h1>
+
+<div class="container">
+<div class="row justify-content-center">
+
+<%= form_with model: user, url: register_create_path, method: :post, local: true, scope: :user do |form| %>
+   
+   <% invalid = user.errors.include?(:username) %>
+   <div class="form-group <%= 'has-danger' if invalid %>">
+      <%= form.label :username %>
+      <%= form.text_field :username, class: "form-control #{'border-danger' if invalid}" %>
+      <% if invalid %>
+         <div class="small">
+            <% user.errors.full_messages_for(:username).each do |error_message|%>
+               <%= error_message %>
+            <% end %>
+         </div>
+      <% end %>
+   </div> 
+
+   <% invalid = user.errors.include?(:password) %>
+   <div class="form-group <%= 'has-danger' if invalid %>">
+      <%= form.label :password %>
+      <%= form.text_field :password, class: "form-control #{'border-danger' if invalid}" %>
+      <% if invalid %>
+         <div class="small">
+            <% user.errors.full_messages_for(:password).each do |error_message|%>
+               <%= error_message %>
+            <% end %>
+         </div>
+      <% end %>
+   </div> 
+ 
+
+   <% invalid = user.errors.include?(:email) %>
+   <div class="form-group <%= 'has-danger' if invalid %>">
+      <%= form.label :email %>
+      <%= form.text_field :email, class: "form-control #{'border-danger' if invalid}" %>
+      <% if invalid %>
+         <div class="small">
+            <% user.errors.full_messages_for(:email).each do |error_message|%>
+               <%= error_message %>
+            <% end %>
+         </div>
+      <% end %>
+   </div> 
+
+<%= form.submit "Sign Up" %>
+<%= 'Already a member?' %>
+<%= link_to "Sign In", login_path %>
+<% end %>
+</div>
+</div>
+
+
