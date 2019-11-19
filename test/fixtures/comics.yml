@@ -1,0 +1,31 @@
+# == Schema Information
+#
+# Table name: comics
+#
+#  id         :integer          not null, primary key
+#  title      :string
+#  comic_file :string
+#  isbn       :string
+#  genre      :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  user_id    :integer
+#
+# Indexes
+#
+#  index_comics_on_user_id  (user_id)
+#
+
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  comic_file: MyString
+  isbn: MyString
+  genre: MyString
+
+two:
+  title: MyString
+  comic_file: MyString
+  isbn: MyString
+  genre: MyString
