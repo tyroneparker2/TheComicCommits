@@ -10,16 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2019_11_19_232216) do
-=======
-ActiveRecord::Schema.define(version: 2019_11_16_033713) do
->>>>>>> master
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-<<<<<<< HEAD
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -41,8 +36,6 @@ ActiveRecord::Schema.define(version: 2019_11_16_033713) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-=======
   create_table "comics", force: :cascade do |t|
     t.string "title"
     t.string "comic_file"
@@ -90,9 +83,9 @@ ActiveRecord::Schema.define(version: 2019_11_16_033713) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comics", "users"
   add_foreign_key "posts", "comics"
   add_foreign_key "posts", "users"
   add_foreign_key "requests", "users"
->>>>>>> master
 end

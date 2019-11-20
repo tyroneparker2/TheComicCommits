@@ -1,9 +1,15 @@
 class SessionController < ApplicationController
-  skip_before_action :authorized, only: [:new_session, :create, :destroy]
+  skip_before_action :authorized, only: [:new_session, :create, :destroy, :test]
   def new_session
     user = User.new
     respond_to do |format|
       format.html { render :login, locals: { user: user } }
+    end
+  end
+  
+  def test
+    respond_to do |format|
+      format.html { render :user}
     end
   end
 
