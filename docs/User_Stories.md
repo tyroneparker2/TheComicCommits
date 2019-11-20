@@ -8,7 +8,7 @@ Project: Comic Books
 | Description |  As a creator, I want to publish a comic book so that users can see them.  |
 | Estimate    |  |
 | Priority    | Two days  |
-| Status      | Not started  |
+| Status      | Started  |
  
 | ID          | US2 |
 | ----------- | ----- |
@@ -34,10 +34,7 @@ Project: Comic Books
 | Priority    | One day |
 | Status      | Not started  |
  
- 
- 
- 
- 
+  
  
 | ID          | US5 |
 | ----------- | ----- |
@@ -45,7 +42,7 @@ Project: Comic Books
 | Description |  As a fan, I want to be able to register for this website so that I can follow a user and comment on comic and review.   |
 | Estimate    |  |
 | Priority    | Half day  |
-| Status      | Not started  |
+| Status      | Completed  |
  
 | ID          | US6 |
 | ----------- | ----- |
@@ -53,12 +50,8 @@ Project: Comic Books
 | Description | As an admin, I want to be able to register a creator so that I can decide who can add comic book to the site.  |
 | Estimate    |  |
 | Priority    | Half day  |
-| Status      | Not started  |
+| Status      | Completed  |
  
- 
-
-
-
 
 | ID          | US7 |
 | ----------- | ----- |
@@ -66,7 +59,7 @@ Project: Comic Books
 | Description |  As an admin, I want to be able to register a critic so that I can decide who can rate comic book.  |
 | Estimate    |  |
 | Priority    | Half day  |
-| Status      | Not started  |
+| Status      | Completed  |
 
 | ID          | US8 |
 | ----------- | ----- |
@@ -74,7 +67,7 @@ Project: Comic Books
 | Description |  As an admin, I want to be able to register an admin so that I can have more people to monitor the site.  |
 | Estimate    |  |
 | Priority    | Half day  |
-| Status      | Not started  |
+| Status      | Completed  |
 
 
 
@@ -84,7 +77,7 @@ Project: Comic Books
 | Description | As a creator, I want to be able to create a comic book so that I can put together one for other users to see.  |
 | Estimate    |  |
 | Priority    | Five days  |
-| Status      | Not started  |
+| Status      | Started  |
 
 | ID          | US10 |
 | ----------- | ----- |
@@ -96,7 +89,7 @@ Project: Comic Books
 
 | ID          | US11 |
 | ----------- | ----- |
-| Title       | Search Review |
+| Title       | Search Reviews |
 | Description |   As a user, I want to be able to search for a review by the title, critic, or likes so that I can have different ways of researching a comic.  |
 | Estimate    |  |
 | Priority    | Three days  |
