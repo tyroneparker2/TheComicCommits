@@ -28,5 +28,5 @@ comic_1 = Comic.create!(title: 'Anyone read xyz?', comic_file: 'file.pdf', isbn:
 =end
 #comic_2 = Comic.create!(user: creator1, title: 'SpatMan', comic_file: 'file.pdf', isbn: '35-23232-323', genre: "Action")
 #review_1 = Review.create!(user: critic1, comic: comic1, text: 'Amazing comic', rating: 5, replied_to: nil)
-q1 = User.create!(username: 'admin', password: 'admin', email: 'admin', group: 'admin')
-q2 = User.create!(username: 'test', password: 'test', email: 'test', group: 'fan')
+q1 = User.create!(username: 'admin', password: 'admin', password_confirmation: 'admin', email: 'admin', group: 'admin')
+q2 = User.create!(username: 'test', password: 'test', password_confirmation: 'test', email: 'test', group: 'fan')

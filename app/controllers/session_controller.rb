@@ -8,10 +8,10 @@ class SessionController < ApplicationController
   end
 
   def create
+    user = User.find_by(username: params[:username])
     respond_to do |format|
       format.html {
-        if User.find_by(username: params[:username], password: params[:password])
-          user = User.find_by(username: params[:username])
+        if user && user.authenticate(params[:password])
           flash[:success] = "Login"
           session[:user_id] = user.id
           redirect_to profile_path
@@ -23,15 +23,29 @@ class SessionController < ApplicationController
     end
   end
 
-  def destroy   
+  def destroy
     session[:user_id] = nil 
     flash[:success] = "Logout"  
+    redirect_to login_path  
+  end
+  
+  def delete  
+    user = User.find(current_user.id)
+    user.destroy   
+    session[:user_id] = nil 
+    flash[:success] = "Account was Deleted"  
     redirect_to login_path  
   end 
 
   def profile
     respond_to do |format|
       format.html { render :profile }
+    end
+  end
+
+  def setting
+    respond_to do |format|
+      format.html { render :setting }
     end
   end
 
@@ -87,6 +101,46 @@ class SessionController < ApplicationController
         end 
       }
     end  
+  end
+
+  def change_email
+    user = User.find(current_user.id)
+    respond_to do |format|
+      format.html {
+        if user.email == params[:current_email]
+          if user.update(email: params[:new_email])
+            flash[:success] = "Email saved successfully"
+            redirect_to profile_path
+          else
+            flash[:error] = "Email could not be saved"
+            redirect_to setting_path
+          end    
+        else
+          flash[:error] = "Invalid Current Email"
+          redirect_to setting_path
+        end
+      }
+    end
+  end
+
+  def change_password
+    user = User.find(current_user.id)
+    respond_to do |format|
+      format.html {
+        if user && user.authenticate(params[:password])
+          if user.update(password: params[:new_password], password_confirmation: params[:password_confirmation])
+            flash[:success] = "Password saved successfully"
+            redirect_to profile_path
+          else
+            flash[:error] = "Password could not be saved"
+            redirect_to setting_path
+          end    
+        else
+          flash[:error] = "Invalid Password"
+          redirect_to setting_path
+        end
+      }
+    end
   end
 
 end

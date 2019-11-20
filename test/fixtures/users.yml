@@ -6,7 +6,7 @@
 #  group           :string
 #  username        :string
 #  email           :string
-#  password        :string
+#  password_digest :string
 #  security_q      :string
 #  security_a      :string
 #  bio             :string
@@ -22,7 +22,7 @@ one:
   group: fan
   username: MyString
   email: MyString
-  password: MyString
+  password_digest: MyString
   security_q: MyString
   security_a: MyString
   bio: MyString
@@ -34,7 +34,7 @@ two:
   group: fan
   username: MyString
   email: MyString
-  password: MyString
+  password_digest: MyString
   security_q: MyString
   security_a: MyString
   bio: MyString

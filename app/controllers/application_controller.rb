@@ -11,13 +11,13 @@ class ApplicationController < ActionController::Base
       end
     end
     def logged_in?
-        !current_user.nil?
+      !current_user.nil?
     end
     def authorized
-        redirect_to login_path unless logged_in?
+      redirect_to login_path unless logged_in?
     end
     def name(id)
-      @value ||= User.find(id)
-      return @value.username
+      value ||= User.find(id)
+      return value.username
     end
 end
