@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   get 'comics', to: 'comics#index', as: 'comics' # index
   get 'comics/:id', to: 'comics#show', as: 'comic' # show
 
+  get 'posts', to: 'posts#index', as: 'posts' # index
+  get 'posts/:id', to: 'posts#show', as: 'post' # show
+
   #root to: redirect('/register', status: 302)
   get 'register', to: 'register#new_user', as: 'new_user'
   post 'create', to: 'register#create', as: 'register_create'
