@@ -1,6 +1,16 @@
-<%= form_with url: register_create_path, method: :post, local: true, scope: :user do |form| %>
+<%= form_with url: set_comic_path, method: :post, local: true, scope: :comic do |form| %>
   
     <%= form.label "Comic Photo" %><br>
-    <%= form.file_field :comicfile %>
-    
+    <%= form.file_field :comic_file %>
+
+    <%= form.submit "Sign Up" %>
 <% end %>
+<p>
+<% users.each do |user| %>
+    <% if user.comic_file.present? %>
+        <%= image_tag(url_for(current_user.comic_file))%>
+    <% else%>
+        nil
+    <%end%>        
+<%end%>    
+</p>

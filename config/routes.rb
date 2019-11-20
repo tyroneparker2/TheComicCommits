@@ -11,4 +11,5 @@ Rails.application.routes.draw do
   get 'promote', to: 'session#promote', as: 'promote'
   post 'destroy', to: 'session#destroy', as: 'destroy'
   get 'test', to: 'session#test', as: 'test'
+  post 'set_comic', to: 'session#set_comic', as: 'set_comic'
 end  

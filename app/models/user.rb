@@ -21,4 +21,5 @@ class User < ApplicationRecord
     has_many :posts, dependent: :destroy
     has_many :comics, dependent: :destroy
     has_many :requests, dependent: :destroy
+    has_one_attached :comic_file
 end
