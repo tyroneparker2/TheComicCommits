@@ -66,3 +66,4 @@ gem 'partial_path_customizer'
 gem 'autoprefixer-rails'
 # Authentication
 gem 'devise'
+gem 'bcrypt', '~> 3.1.7'

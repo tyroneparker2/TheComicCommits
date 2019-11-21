@@ -8,7 +8,7 @@ class RegisterController < ApplicationController
     end
 
     def create
-        user = User.new(params.require(:user).permit(:username, :password, :email))
+        user = User.new(params.require(:user).permit(:username, :password, :password_confirmation, :email))
         respond_to do |format|
           format.html {
             if user.save
