@@ -25,9 +25,33 @@ review_1 = Review.create!(text: 'Anyone read xyz?', rating: 5, replied_to: nil)
 
 comic_1 = Comic.create!(title: 'Anyone read xyz?', comic_file: 'file.pdf', isbn: '35-23232-323', genre: "Action")
 
+comic_2 = Comic.create!(user: creator21, title: 'SpatMan', comic_file: 'file.pdf', isbn: '35-23232-323', genre: "Action")
+review_1 = Review.create!(user: critic21, comic: comic1, text: 'Amazing comic', rating: 5, replied_to: nil)
+
 =end
+
+
+=begin
+creator1 = Creator.create!(username: 'mrcreator', email: 'creator@email.com', password: 'abc123', 
+security_q: 'What is your favorite animal?', security_a: 'Squid', bio: 'I like make comics',
+recommendations: 'nil', admin_code: 'nil')
+creator2 = Creator.create!(username: 'mscreator', email: 'creator@gmail.com', password: 'abc123', 
+security_q: 'What is your favorite animal?', security_a: 'Camel', bio: 'I like make comics',
+recommendations: 'nil', admin_code: 'nil')
+creator3 = Creator.create!(username: 'brercreator', email: 'creator@yahoo.com', password: 'abc123', 
+security_q: 'What is your favorite animal?', security_a: 'Bee', bio: 'I like make comics',
+recommendations: 'nil', admin_code: 'nil')
+=end
+
+=begin
+
+comic_3 = creator1.comics.create!( title: 'Mutiny', comic_file: 'Mutiny.png', isbn: '35-2232-323-1', genre: "Action", user_id: 1)
+comic_4 = creator2.comics.create!(title: 'Amazing Ghost Stories', comic_file: 'ags.png', isbn: '34-3302-323', genre: "Horror", user_id: 2)
+comic_2 = creator3.create!(title: 'After Dark', comic_file: 'AfterDark.png', isbn: '10-892-4203', genre: "Crime", user_id: 3)
+
 #comic_2 = Comic.create!(user: creator1, title: 'SpatMan', comic_file: 'file.pdf', isbn: '35-23232-323', genre: "Action")
 #review_1 = Review.create!(user: critic1, comic: comic1, text: 'Amazing comic', rating: 5, replied_to: nil)
-q1 = User.create!(username: 'admin', password: 'admin', email: 'admin', group: 'admin')
-q2 = User.create!(username: 'test', password: 'test', email: 'test', group: 'fan')
-q3 = User.create!(username: 'creator', password: 'creator', email: 'creato', group: 'creator')
+=end
+q1 = User.create!(username: 'admin', password: 'admin', password_confirmation: 'admin', email: 'admin', group: 'admin')
+q2 = User.create!(username: 'test', password: 'test', password_confirmation: 'test', email: 'test', group: 'fan')
+q3 = User.create!(username: 'creator', password: 'creator', password_confirmation: 'creator', email: 'creator', group: 'creator')

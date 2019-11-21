@@ -1,61 +1,67 @@
 <h1 class="text-center">Requests to be Upgraded</h1>
-<nav class="navbar navbar-dark bg-dark nav-fill nav-justified">
-    <span class="navbar-brand" style="color:rgb(255, 165, 0)">Comic Commit</span>
-    <a class="nav-link" href="profile">Profile</a>
-    <a class="nav-link" href="#">Discover</a>
-    <a class="nav-link" href="#">Review</a>
-    <a class="nav-link" href="#">Forum</a>
-    <form class="form-inline">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-    <div class="dropdown">
-      <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <%= current_user.username %>
-      </a>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-        <% if current_user.group=='admin' %>
-          <a class="dropdown-item" href="promote">Requests</a>
-        <% elsif current_user.group=='creator' %>
-            <a class="dropdown-item" href="#">Comic</a>
-        <% elsif current_user.group=='critic' %>
-            <a class="dropdown-item" href="#">Review</a>
-        <% else %>  
-          <a class="dropdown-item" href="upgrade">Upgrade</a>
-        <% end %>
-        <a class="dropdown-item" href="#">Setting</a>
-      </div>
-    </div>
-    <%= button_to "Logout", destroy_path, {class:'btn btn-danger'}  %>
-</nav>
-<div class="container">
-<div class="row justify-content-center">
 
-<% requests.each do |request| %>
-    <div>
-    <%= form_with url: promote_user_path, method: :post, local: true do |form| %>
+<nav class="navbar navbar-dark bg-dark nav-fill nav-justified">
+  
+  <span class="navbar-brand" style="color:rgb(255, 165, 0)">Comic Commit</span>
+  <a class="nav-link" href="profile">Profile</a>
+  <a class="nav-link" href="#">Discover</a>
+  <a class="nav-link" href="#">Review</a>
+  <a class="nav-link" href="#">Forum</a>
+  <form class="form-inline">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  </form>
+  
+  <div class="dropdown">
+    <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <%= current_user.username %>
+    </a>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+      <% if current_user.group=='admin' %>
+        <a class="dropdown-item" href="promote">Requests</a>
+      <% elsif current_user.group=='creator' %>
+          <a class="dropdown-item" href="#">Comic</a>
+      <% elsif current_user.group=='critic' %>
+          <a class="dropdown-item" href="#">Review</a>
+      <% else %>  
+        <a class="dropdown-item" href="upgrade">Upgrade</a>
+      <% end %>
+      <a class="dropdown-item" href="setting">Setting</a>
+    </div>
+  </div>
+  
+  <%= button_to "Logout", destroy_path, {class:'btn btn-danger'}  %>
+</nav>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <% requests.each do |request| %>
+      
+      <div><%= form_with url: promote_user_path, method: :post, local: true do |form| %>
         <table class="border border-primary" style="width:150%">
-            <tr>
-                <th class="text-center"><%= name(request.user_id) %> wants to be a <%= request.acc_type%></th>
-            </tr>
-            <tr>
-                <td class="text-center">Reason:</td>
-            </tr>
-            <tr>
-                <td class="border border-dark"><%= request.reason %></td>
-            </tr>
+          <tr>
+            <th class="text-center"><%= name(request.user_id) %> wants to be a <%= request.acc_type%></th>
+          </tr>
+          <tr>
+            <td class="text-center">Reason:</td>
+          </tr>
+          <tr>
+            <td class="border border-dark"><%= request.reason %></td>
+          </tr>
         </table>
-        <div >
-            <%= hidden_field_tag(:id, request.user_id) %>
-            <%= hidden_field_tag(:acc_type, request.acc_type) %>
-            <%= hidden_field_tag(:request_id, request.id) %>
-            <%= form.submit "Submit" %>
-            <%= form.radio_button :answer, 'accept' %>
-            <%= form.label :type_accept, "Accept" %>
-            <%= form.radio_button :answer, 'decline' %>
-            <%= form.label :type_decline, "Decline" %>
+        
+        <div>
+          <%= hidden_field_tag(:id, request.user_id) %>
+          <%= hidden_field_tag(:acc_type, request.acc_type) %>
+          <%= hidden_field_tag(:request_id, request.id) %>
+          <%= form.submit "Submit" %>
+          <%= form.radio_button :answer, 'accept' %>
+          <%= form.label :type_accept, "Accept" %>
+          <%= form.radio_button :answer, 'decline' %>
+          <%= form.label :type_decline, "Decline" %>
         </div>
-   <% end %>
-<% end %>
-</div>
+
+      <% end %>
+    <% end %>
+  </div>
 </div>

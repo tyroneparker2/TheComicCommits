@@ -6,7 +6,7 @@
 #  group           :string
 #  username        :string
 #  email           :string
-#  password        :string
+#  password_digest :string
 #  security_q      :string
 #  security_a      :string
 #  bio             :string
