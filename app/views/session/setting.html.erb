@@ -35,6 +35,19 @@
 
 <div class="container">
    <div class="row justify-content-center">
+      <%= form_with url: change_bio_path, method: :post, local: true do |form| %>
+
+         <div>
+            <h4 class="text-center"><%= form.label :bio, "Change Bio" %></h4>
+            <%= form.text_area :bio, size: '60x5' %>
+         </div> 
+
+         <p class= "text-center"><%= form.submit "Change" %></p>
+      
+      <% end %>
+   </div>
+
+   <div class="row justify-content-center">
       <%= form_with url: change_email_path, method: :post, local: true do |form| %>
 
          <div>

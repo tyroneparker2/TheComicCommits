@@ -1,9 +1,9 @@
-<h1 class="text-center">Profile</h1>
+<h1 class="text-center"><%= user.username.capitalize %>'s Profile Page</h1>
 
 <nav class="navbar navbar-dark bg-dark nav-fill nav-justified">
   
   <span class="navbar-brand" style="color:rgb(255, 165, 0)">Comic Commit</span>
-  <a class="nav-link" href="profile">Profile</a>
+  <a class="nav-link" href="/profile">Profile</a>
   <a class="nav-link" href="#">Discover</a>
   <a class="nav-link" href="#">Review</a>
   <a class="nav-link" href="#">Forum</a>
@@ -18,15 +18,15 @@
     </a>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
       <% if current_user.group=='admin' %>
-        <a class="dropdown-item" href="promote">Requests</a>
+        <a class="dropdown-item" href="/promote">Requests</a>
       <% elsif current_user.group=='creator' %>
           <a class="dropdown-item" href="#">Comic</a>
       <% elsif current_user.group=='critic' %>
           <a class="dropdown-item" href="#">Review</a>
       <% else %>  
-        <a class="dropdown-item" href="upgrade">Upgrade</a>
+        <a class="dropdown-item" href="/upgrade">Upgrade</a>
       <% end %>
-      <a class="dropdown-item" href="setting">Setting</a>
+      <a class="dropdown-item" href="/setting">Setting</a>
     </div>
   </div>
 
@@ -35,28 +35,11 @@
 
 <% if !current_user.bio.present?%>
 
-  <div class="container">
-   <div class="row justify-content-center">
-      <%= form_with url: change_bio_path, method: :post, local: true do |form| %>
-
-         <div class="form-group">
-            <h4 class="text-center"><%= form.label :bio, "Add a Bio to Tell Users About Yourself" %></h4>
-            <%= form.text_area :bio, size: '60x5' %>
-         </div>
-
-         <div class="text-center">
-            <%= form.submit "Add" %><br>
-         </div>
-
-      <% end %>
-    </div>
-  </div>
-
 <% else %>
   <h4 class="text-center">Bio</h4>
   <div class="container" >
     <div class="row justify-content-center">
-      <p class="border border-secondary text-break text-center" style="width: 20rem;" ><%= current_user.bio %></p>
+      <p class="border border-secondary text-break text-center" style="width: 20rem;" ><%= user.bio %></p>
     </div>
   </div>
 

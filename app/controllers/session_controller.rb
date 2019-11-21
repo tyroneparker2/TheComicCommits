@@ -5,6 +5,7 @@ class SessionController < ApplicationController
     respond_to do |format|
       format.html { render :login, locals: { user: user } }
     end
+    
   end
 
   def create
@@ -119,6 +120,22 @@ class SessionController < ApplicationController
           flash[:error] = "Invalid Current Email"
           redirect_to setting_path
         end
+      }
+    end
+  end
+
+  def change_bio
+    user = User.find(current_user.id)
+    user.bio = params[:bio]
+    respond_to do |format|
+      format.html {
+        if params[:bio].present? && user.save 
+          flash[:success] = "Bio saved successfully"
+          redirect_to profile_path
+        else
+          flash[:error] = "Bio could not be saved"
+          redirect_to setting_path
+        end    
       }
     end
   end
