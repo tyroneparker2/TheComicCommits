@@ -1,5 +1,5 @@
 class SessionController < ApplicationController
-  skip_before_action :authorized, only: [:new_session, :create, :destroy, :test, :set_comic]
+  skip_before_action :authorized, only: [:new_session, :create, :destroy,]
   def new_session
     user = User.new
     respond_to do |format|
@@ -7,10 +7,9 @@ class SessionController < ApplicationController
     end
   end
   
-  def test
-    users = User.all
+  def comic
     respond_to do |format|
-      format.html{ render :user, locals: { users: users } }
+      format.html{ render :comic }
     end
   end
 
@@ -97,8 +96,8 @@ class SessionController < ApplicationController
   end
 
   def set_comic
-    user = User.find(1)
-    users = User.all
+    user = User.find(current_user.id)
+    user.comic_file.purge 
     user.comic_file.attach(params[:comic_file])
     respond_to do |format|
       format.html {
@@ -107,8 +106,9 @@ class SessionController < ApplicationController
         else
           flash.now[:error] = "Request didn't saved successfully"
         end
-        render :user, locals: { users: users }
+        render :comic
       }
       end  
   end
-end
+
+end  

@@ -19,6 +19,5 @@
 class Comic < ApplicationRecord
     belongs_to :user
     has_many :posts, dependent: :destroy
-    has_one_attached :comic_file
 end
 

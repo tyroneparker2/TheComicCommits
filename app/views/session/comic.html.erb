@@ -1,4 +1,4 @@
-<h1 class="text-center">Profile</h1>
+<h1 class="text-center">Create Comic</h1>
 <nav class="navbar navbar-dark bg-dark nav-fill nav-justified">
     <span class="navbar-brand" style="color:rgb(255, 165, 0)">Comic Commit</span>
     <a class="nav-link" href="profile">Profile</a>
@@ -29,3 +29,13 @@
     <%= button_to "Logout", destroy_path, {class:'btn btn-danger'}  %>
 </nav>
 
+<%= form_with url: set_comic_path, method: :post, local: true do |form| %>
+  
+    <%= form.label "Comic Photo" %><br>
+    <%= form.file_field :comic_file %><br><br>
+    
+    <%= form.submit "Publish" %>
+<% end %><br>
+<% if current_user.comic_file.attached? %>
+    <td><%= image_tag(current_user.comic_file, size: "500x500") %></td>
+<%end%>    

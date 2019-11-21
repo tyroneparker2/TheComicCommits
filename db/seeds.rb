@@ -30,3 +30,4 @@ comic_1 = Comic.create!(title: 'Anyone read xyz?', comic_file: 'file.pdf', isbn:
 #review_1 = Review.create!(user: critic1, comic: comic1, text: 'Amazing comic', rating: 5, replied_to: nil)
 q1 = User.create!(username: 'admin', password: 'admin', email: 'admin', group: 'admin')
 q2 = User.create!(username: 'test', password: 'test', email: 'test', group: 'fan')
+q3 = User.create!(username: 'creator', password: 'creator', email: 'creato', group: 'creator')

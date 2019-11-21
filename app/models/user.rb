@@ -17,9 +17,9 @@
 #
 
 class User < ApplicationRecord 
+    has_one_attached :comic_file
     validates :username, :password, :email, presence: true
     has_many :posts, dependent: :destroy
     has_many :comics, dependent: :destroy
     has_many :requests, dependent: :destroy
-    has_one_attached :comic_file
 end
