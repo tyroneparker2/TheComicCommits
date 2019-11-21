@@ -17,6 +17,7 @@
 #
 
 class User < ApplicationRecord 
+    has_one_attached :comic_file
     has_secure_password
     validates :username, :password_digest, :email, presence: true
     validates :email, :username, uniqueness: true
