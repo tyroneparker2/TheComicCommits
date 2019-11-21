@@ -51,8 +51,7 @@ comic_2 = creator3.create!(title: 'After Dark', comic_file: 'AfterDark.png', isb
 
 #comic_2 = Comic.create!(user: creator1, title: 'SpatMan', comic_file: 'file.pdf', isbn: '35-23232-323', genre: "Action")
 #review_1 = Review.create!(user: critic1, comic: comic1, text: 'Amazing comic', rating: 5, replied_to: nil)
-=end 
-
-
-q1 = User.create!(username: 'admin', password: 'admin', email: 'admin', group: 'admin')
-q2 = User.create!(username: 'test', password: 'test', email: 'test', group: 'fan')
+=end
+q1 = User.create!(username: 'admin', password: 'admin', password_confirmation: 'admin', email: 'admin', group: 'admin')
+q2 = User.create!(username: 'test', password: 'test', password_confirmation: 'test', email: 'test', group: 'fan')
+q3 = User.create!(username: 'creator', password: 'creator', password_confirmation: 'creator', email: 'creator', group: 'creator')

@@ -1,0 +1,41 @@
+<h1 class="text-center">Create Comic</h1>
+<nav class="navbar navbar-dark bg-dark nav-fill nav-justified">
+    <span class="navbar-brand" style="color:rgb(255, 165, 0)">Comic Commit</span>
+    <a class="nav-link" href="profile">Profile</a>
+    <a class="nav-link" href="#">Discover</a>
+    <a class="nav-link" href="#">Review</a>
+    <a class="nav-link" href="#">Forum</a>
+    <form class="form-inline">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+    <div class="dropdown">
+      <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <%= current_user.username %>
+      </a>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <% if current_user.group=='admin' %>
+          <a class="dropdown-item" href="promote">Requests</a>
+        <% elsif current_user.group=='creator' %>
+            <a class="dropdown-item" href="comic">Comic</a>
+        <% elsif current_user.group=='critic' %>
+            <a class="dropdown-item" href="#">Review</a>
+        <% else %>  
+          <a class="dropdown-item" href="upgrade">Upgrade</a>
+        <% end %>
+        <a class="dropdown-item" href="#">Setting</a>
+      </div>
+    </div>
+    <%= button_to "Logout", destroy_path, {class:'btn btn-danger'}  %>
+</nav>
+
+<%= form_with url: set_comic_path, method: :post, local: true do |form| %>
+  
+    <%= form.label "Comic Photo" %><br>
+    <%= form.file_field :comic_file %><br><br>
+    
+    <%= form.submit "Publish" %>
+<% end %><br>
+<% if current_user.comic_file.attached? %>
+    <td><%= image_tag(current_user.comic_file, size: "500x500") %></td>
+<%end%>    

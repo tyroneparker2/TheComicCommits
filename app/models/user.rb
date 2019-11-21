@@ -6,7 +6,7 @@
 #  group           :string
 #  username        :string
 #  email           :string
-#  password        :string
+#  password_digest :string
 #  security_q      :string
 #  security_a      :string
 #  bio             :string
@@ -17,7 +17,10 @@
 #
 
 class User < ApplicationRecord 
-    validates :username, :password, :email, presence: true
+    has_one_attached :comic_file
+    has_secure_password
+    validates :username, :password_digest, :email, presence: true
+    validates :email, :username, uniqueness: true
     has_many :posts, dependent: :destroy
     has_many :comics, dependent: :destroy
     has_many :requests, dependent: :destroy
