@@ -20,7 +20,7 @@
       <% if current_user.group=='admin' %>
          <a class="dropdown-item" href="promote">Requests</a>
       <% elsif current_user.group=='creator' %>
-         <a class="dropdown-item" href="#">Comic</a>
+         <a class="dropdown-item" href="comic">Comic</a>
       <% elsif current_user.group=='critic' %>
          <a class="dropdown-item" href="#">Review</a>
       <% else %>  

@@ -8,5 +8,6 @@ class CreateComics < ActiveRecord::Migration[6.0]
 
       t.timestamps
     end
+    remove_column :comics, :comic_file
   end
 end

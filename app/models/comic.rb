@@ -4,7 +4,6 @@
 #
 #  id         :integer          not null, primary key
 #  title      :string
-#  comic_file :string
 #  isbn       :string
 #  genre      :string
 #  created_at :datetime         not null
