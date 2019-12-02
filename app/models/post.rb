@@ -3,10 +3,8 @@
 # Table name: posts
 #
 #  id         :integer          not null, primary key
-#  type       :string
+#  title      :string
 #  text       :text
-#  rating     :integer
-#  replied_to :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  comic_id   :integer
@@ -19,6 +17,6 @@
 #
 
 class Post < ApplicationRecord
-    belongs_to :user
-    belongs_to :comic
+    belongs_to :user, optional: true
+    belongs_to :comic, optional: true 
 end

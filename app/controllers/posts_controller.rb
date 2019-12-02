@@ -1,8 +1,34 @@
 class PostsController < ApplicationController
-    def new
+  
+  def index
+    @posts = Post.all
+    respond_to do |format|
+      format.html { render :index, locals: { posts: posts } }
     end
+  end
+
+
+  def show
+    @post = Post.find(params[:id])
+  end
+
+  def new
+  end
 
     def create
-        render plain: params[:article].inspect
+        @post = Post.new(post_params)
+       
+        @post.save
+        redirect_to @post
     end
+    
+    private
+      def post_params
+        params.require(:post).permit(:title, :text)
+      end
+
+  def index
+     @posts = Post.all
+  end
+
 end
