@@ -1,5 +1,5 @@
 
-<h1>Listing Posts</h1>
+<h1>All Posts: </h1>
  
 <table>
   <tr>
@@ -8,13 +8,15 @@
     <th></th>
   </tr>
     <tr>
-        <% posts.each do |post| %>
+        <% @posts.each do |post| %>
             <div id="<%= dom_id(post) %>">
             
                 <div>
                     <tr>
                         <td><%= post.title %></td>
                         <td><%= post.text %></td>
+                        <td><%= link_to 'Show', post_path(post) %></td>
+
                     </tr>
                 </div>
         

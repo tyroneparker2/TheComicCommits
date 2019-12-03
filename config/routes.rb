@@ -20,5 +20,7 @@ Rails.application.routes.draw do
   post 'set_comic', to: 'session#set_comic', as: 'set_comic'
   post 'delete', to: 'session#delete', as: 'delete'
 
-  resources :posts
+  resources :posts do 
+    resources :comments
+  end
 end

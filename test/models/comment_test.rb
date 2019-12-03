@@ -1,19 +1,16 @@
 # == Schema Information
 #
-# Table name: posts
+# Table name: comments
 #
 #  id         :integer          not null, primary key
-#  title      :string
-#  text       :text
+#  body       :text
+#  post_id    :integer          not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  comic_id   :integer
-#  user_id    :integer
 #
 # Indexes
 #
-#  index_posts_on_comic_id  (comic_id)
-#  index_posts_on_user_id   (user_id)
+#  index_comments_on_post_id  (post_id)
 #
 
 require 'test_helper'
