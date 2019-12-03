@@ -1,0 +1,30 @@
+<h1>Review Page</h1>
+
+ <p>This is a page where you can leave reviews of your favorite material!</p>
+
+ <h2>Review</h2>
+
+ <% if local_assigns.has_key? :status_msg %>
+   <p><%= status_msg %></p>
+ <% end %>
+
+  <%= form_with url: leave_feedback_path, local: true, method: :post do %>
+         <div>
+             <%= label_tag "topic" %>
+             <%= text_field_tag "topic", <%= text_field_tag "name", feedback.fetch(:name, nil) %> 
+         </div>
+
+         <div>
+            <%= label_tag "feedback_type" %>
+            <%= select_tag "feedback_type", options_for_select([ "Review", "Bug Report" ], feedback.fetch(:feedback_type, "")), prompt: 'Choose one...' %>
+         </div>
+
+         <div>
+             <%= label_tag "message" %><br />
+             <%= text_area_tag "message", feedback.fetch(:message, nil), size: "27x7" %>
+         </div>
+
+    <%= submit_tag "Publish Review" %>
+ <% end %>
+
+ <p><%= link_to 'Home Page', homepage_path %></p>
