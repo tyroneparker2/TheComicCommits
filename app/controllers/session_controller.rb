@@ -36,11 +36,17 @@ class SessionController < ApplicationController
     session[:user_id] = nil 
     flash[:success] = "Account was Deleted"  
     redirect_to login_path  
-  end 
+  end
+  
+  def delete_comic   
+    flash[:success] = "Comic was Deleted"  
+    redirect_to profile_path  
+  end
 
   def profile
+    comics = Comic.where(user_id: current_user.id).all 
     respond_to do |format|
-      format.html { render :profile }
+      format.html { render :profile, locals: { comics: comics } }
     end
   end
 

@@ -9,5 +9,7 @@ class CreateComics < ActiveRecord::Migration[6.0]
       t.timestamps
     end
     remove_column :comics, :comic_file
+    add_column :comics, :category, :string
+    add_reference :comics, :user, foreign_key: true
   end
 end

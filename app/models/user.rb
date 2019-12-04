@@ -17,11 +17,11 @@
 #
 
 class User < ApplicationRecord 
-    has_one_attached :comic_file
     has_secure_password
     validates :username, :password_digest, :email, presence: true
     validates :email, :username, uniqueness: true
     has_many :posts, dependent: :destroy
-    has_many :comics, dependent: :destroy
     has_many :requests, dependent: :destroy
+    has_many :comics, dependent: :destroy
+    has_many :series, dependent: :destroy
 end

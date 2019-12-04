@@ -4,13 +4,17 @@
   
   <span class="navbar-brand" style="color:rgb(255, 165, 0)">Comic Commit</span>
   <a class="nav-link" href="/profile">Profile</a>
-  <a class="nav-link" href="#">Discover</a>
+  <a class="nav-link" href="/discover">Discover</a>
   <a class="nav-link" href="#">Review</a>
   <a class="nav-link" href="#">Forum</a>
-  <form class="form-inline">
-    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-  </form>
+  <%= form_with url: user_search_path, method: :get, local: true do |form| %>
+    <div class="input-group">  
+      <%= search_field_tag :search, params[:search], placeholder: "Search for Users", class: "form-control" %>  
+      <div class="input-group-btn">  
+        <%= button_tag "Search", :class => 'btn btn-info glyphicon glyphicon-search',:name => nil%>  
+      </div>  
+    </div>
+  <%end%>
   
   <div class="dropdown">
     <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -20,7 +24,7 @@
       <% if current_user.group=='admin' %>
         <a class="dropdown-item" href="/promote">Requests</a>
       <% elsif current_user.group=='creator' %>
-          <a class="dropdown-item" href="comic">Comic</a>
+          <a class="dropdown-item" href="/comic">Comic</a>
       <% elsif current_user.group=='critic' %>
           <a class="dropdown-item" href="#">Review</a>
       <% else %>  
@@ -33,14 +37,47 @@
   <%= button_to "Logout", destroy_path, {class:'btn btn-danger'}  %>
 </nav>
 
-<% if !current_user.bio.present?%>
+<% if !user.bio.present?%>
 
 <% else %>
-  <h4 class="text-center">Bio</h4>
   <div class="container" >
+    <h4 class="text-center">Bio</h4>
     <div class="row justify-content-center">
       <p class="border border-secondary text-break text-center" style="width: 20rem;" ><%= user.bio %></p>
     </div>
   </div>
 
 <%end%>
+
+<% if user.group=='creator' %>
+  
+  <div class="container">
+    <h4 class="text-center">Comics</h4>
+    <div class="row justify-content-center">
+      <% comics.each do |comic| %>
+        <div class = "btn-group row justify-content-center">
+          <table class="border border-dark" style="width:50%">
+            <tr>
+              <td class="text-center">Comic Name: <%= comic.title %></td>
+            </tr>
+            <tr>
+              <td><%= image_tag(comic.cover_file, size: "600x500") %></td>
+            </tr>
+          </table>
+          <div class = "btn-group row justify-content-center" role="group" style="width:50%">
+            <%= button_to 'View ', view_comic_path, method: :get, params: { title: comic.title } %>
+          <div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+<% elsif user.group=='critic'%>
+  
+  <div class="container">
+    <h4 class="text-center">Reviews</h4>
+    <div class="row justify-content-center">
+    </div>
+  </div>
+
+<% end %>
