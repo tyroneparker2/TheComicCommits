@@ -14,7 +14,7 @@
 
     <a class="nav-link" href="#">Review</a>
 
-    <a class="nav-link" href="#">Forum</a>
+    <a class="nav-link" href="http://localhost:3000/posts">Forum</a>
 
     <form class="form-inline">
 
@@ -55,6 +55,7 @@
     <div id="<%= dom_id(post) %>">            
         <h3><%= post.title %></h3>
         <p><%= post.text %><p>
+        <p><%= post.poster %><p>
         <p><%= link_to 'View Post/View Comments/Create Comment', post_path(post) %></p>
     </div>
 <% end %>

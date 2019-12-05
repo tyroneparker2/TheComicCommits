@@ -9,6 +9,7 @@
 #  updated_at :datetime         not null
 #  comic_id   :integer
 #  user_id    :integer
+#  poster     :string
 #
 # Indexes
 #

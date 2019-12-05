@@ -10,7 +10,7 @@
 
     <a class="nav-link" href="#">Review</a>
 
-    <a class="nav-link" href="#">Forum</a>
+    <a class="nav-link" href="http://localhost:3000/posts">Forum</a>
 
     <form class="form-inline">
 
@@ -56,10 +56,16 @@
   <%= @post.text %>
 </h3>
 
+<h3>
+  <strong>Posted by:</strong>
+  <%= @post.poster %>
+</h3>
+
 <h5>Comments:</h5>
 <% @post.comments.each do |comment| %>
   <p>
     <%= comment.body %>
+    <%= comment.commenter %>
   </p>
 <% end %>
 

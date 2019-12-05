@@ -18,6 +18,7 @@ class PostsController < ApplicationController
     def create
         @post = Post.new(post_params)
         @post.user_id = current_user.id
+        @post.poster = current_user.username
        
         @post.save
         redirect_to @post
