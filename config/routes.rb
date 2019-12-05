@@ -18,5 +18,6 @@ Rails.application.routes.draw do
   get 'comic', to: 'session#comic', as: 'comic'
   post 'set_comic', to: 'session#set_comic', as: 'set_comic'
   post 'delete', to: 'session#delete', as: 'delete'
+  get 'review', to: 'static_pages#review', as: 'review'
   post 'review', to: 'static_pages#leave_review', as: 'leave_review'
 end

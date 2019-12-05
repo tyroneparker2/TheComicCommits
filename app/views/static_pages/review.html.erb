@@ -8,10 +8,10 @@
    <p><%= status_msg %></p>
  <% end %>
 
-  <%= form_with url: leave_feedback_path, local: true, method: :post do %>
+  <%= form_with url: leave_review_path, local: true, method: :post do %>
          <div>
              <%= label_tag "topic" %>
-             <%= text_field_tag "topic", <%= text_field_tag "name", feedback.fetch(:name, nil) %> 
+             <%= text_field_tag "topic", feedback.fetch(:name, nil) %> 
          </div>
 
          <div>
