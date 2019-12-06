@@ -34,5 +34,9 @@ Rails.application.routes.draw do
   post 'set_comic', to: 'comics#set_comic', as: 'set_comic'
   post 'change_comic', to: 'comics#change_comic', as: 'change_comic'
   post 'delete_comic', to: 'comics#delete_comic', as: 'delete_comic'
+
+  resources :posts do 
+    resources :comments
+  end
   
 end

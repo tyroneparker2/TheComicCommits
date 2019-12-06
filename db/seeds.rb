@@ -205,3 +205,6 @@ for i in 2..27 do
     x = 'app/assets/images/13/0_' + y
     c15.comic_file.attach(io: File.open(x), filename: y, content_type: 'image/jpg')
 end
+
+p1 = Post.create!(title: 'What is here?', text: 'Not Sure')
+

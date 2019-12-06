@@ -67,17 +67,29 @@ ActiveRecord::Schema.define(version: 2019_12_05_032643) do
     t.bigint "user_id"
     t.index ["follower_id"], name: "index_notifications_on_follower_id"
     t.index ["user_id"], name: "index_notifications_on_user_id"
+  
+    create_table "comments", force: :cascade do |t|
+    t.text "body"
+    t.bigint "post_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "commenter"
+    t.index ["post_id"], name: "index_comments_on_post_id"
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "posts", force: :cascade do |t|
-    t.string "type"
+    t.string "title"
     t.text "text"
-    t.integer "rating"
-    t.integer "replied_to"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "comic_id"
     t.bigint "user_id"
+    t.string "poster"
     t.index ["comic_id"], name: "index_posts_on_comic_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
@@ -116,10 +128,15 @@ ActiveRecord::Schema.define(version: 2019_12_05_032643) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comics", "series"
   add_foreign_key "comics", "users"
+<<<<<<< HEAD
   add_foreign_key "followers", "users"
   add_foreign_key "followers", "users", column: "following_id"
   add_foreign_key "notifications", "followers"
   add_foreign_key "notifications", "users"
+=======
+  add_foreign_key "comments", "posts"
+  add_foreign_key "follows", "users", column: "following_id"
+>>>>>>> c66d8213890ad4ea4e521ff41de73152a9b3abc2
   add_foreign_key "posts", "comics"
   add_foreign_key "posts", "users"
   add_foreign_key "requests", "users"

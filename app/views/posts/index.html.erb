@@ -1,4 +1,4 @@
-<h1 class="text-center">Search for Comic</h1>
+<h1 class="text-center">Comic Nook Forum</h1>
 
 <nav class="navbar navbar-dark bg-dark nav-fill nav-justified">
   
@@ -9,13 +9,13 @@
   <a class="nav-link" href="posts">Forum</a>
   <%= form_with url: user_search_path, method: :get, local: true do |form| %>
     <div class="input-group">  
-      <%= search_field_tag :search, params[:s], placeholder: "Search for Users", class: "form-control" %>  
+      <%= search_field_tag :search, params[:search], placeholder: "Search for Users", class: "form-control" %>  
       <div class="input-group-btn">  
         <%= button_tag "Search", :class => 'btn btn-info glyphicon glyphicon-search',:name => nil%>  
       </div>  
     </div>
   <%end%>
-
+  
   <div class="dropdown">
     <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       <%= notify.count%><i class="fa fa-bell"></i>
@@ -49,45 +49,16 @@
 </nav>
 
 <div class="container">
-   <div class="row justify-content-center">
-        <%= form_with url: comic_search_path, method: :get, local: true do |form| %>
-            <div class="input-group">  
-                <%= search_field_tag :search, params[:search], placeholder: "Search for Comics", class: "form-control" %>  
-                <div class="input-group-btn">  
-                    <%= button_tag "Search", :class => 'btn btn-info glyphicon glyphicon-search',:name => nil%>  
-                </div>
-            <%= form.select :genre, ['All', 'Superhero', 'Western', 'Humor', 'Non-ficton', 'Fantasy', 'Horror', 'Other' ] %>
-            </div>
-            <div class="form-check form-check-inline">
-                <h4>Sort By:</h4>
-            </div>
-            <div class="form-check form-check-inline">
-                <%= form.radio_button :acc_type, 'likes' %>
-                <%= form.label :type_creator, "Likes" %>
-            </div>
-            <div class="form-check form-check-inline">
-                <%= form.radio_button :acc_type, 'rating' %>
-                <%= form.label :type_critic, "Rating" %>
-            </div>
-        <%end%>
-    </div>
-    <h4 class = "text-center">Search Result</h4>
+  <% @posts.each do |post| %>
     <div class="row justify-content-center">
-        <% results.each do |result| %>
-            <table class="border border-dark" style="width:50%">
-                <tr>
-                    <td class="text-center">Comic Name: <%= result.title %></td>
-                </tr>
-                <tr>
-                    <td class="text-center">By: <%= name(result.user_id) %></td>
-                </tr>
-                <tr>
-                    <td class="text-center"><%= button_to 'View ', view_comic_path, method: :get, params: { title: result.title } %></td>
-                </tr>
-                <tr>
-                    <td><%= image_tag(result.cover_file, size: "600x500") %></td>
-                </tr>
-            </table>
-        <% end %>
+      <div id="<%= dom_id(post) %>">            
+        <h3><%= post.title %></h3>
+        <p><%= post.text %><p>
+        <p><%= post.poster %><p>
+        <p><%= link_to 'View Post/View Comments/Create Comment', post_path(post) %></p>
+      </div>
     </div>
+  <% end %>
 </div>
+<p class= "text-center"><%= link_to 'Make your own post', new_post_path(@post) %></p>
+
