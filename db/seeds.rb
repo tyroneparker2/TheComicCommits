@@ -206,5 +206,5 @@ for i in 2..27 do
     c15.comic_file.attach(io: File.open(x), filename: y, content_type: 'image/jpg')
 end
 
-p1 = Post.create!(title: 'What is here?', text: 'Not Sure')
+p1 = Post.create!(title: 'What is here?', text: 'Not Sure', poster: u15.username)
 

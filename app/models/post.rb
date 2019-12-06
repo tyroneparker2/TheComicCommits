@@ -9,6 +9,7 @@
 #  updated_at :datetime         not null
 #  comic_id   :integer
 #  user_id    :integer
+#  username   :string
 #  poster     :string
 #
 # Indexes
@@ -22,6 +23,7 @@ class Post < ApplicationRecord
     belongs_to :comic, optional: true 
 
     has_many :comments
+    validates :text, presence: true
     validates :title, presence: true,
                       length: { minimum: 5 }
   

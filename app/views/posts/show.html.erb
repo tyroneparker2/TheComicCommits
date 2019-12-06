@@ -50,33 +50,32 @@
 
 <div class="container">
   <div class="row justify-content-center">
-    <h2>
-      <strong>Title:</strong>
-      <%= @post.title %>
-    </h2>
+    <h4>Title: </h4>
+    <p style="font-size:130%;"><%= @post.title %></p>
+  </div>
  
-    <h3>
-      <strong>Text:</strong>
-      <%= @post.text %>
-    </h3>
+  <div class="row justify-content-center">
+    <h4>Text:</h4>
+    <p style="font-size:130%;"><%= @post.text %></p>
+  </div>
 
-    <h3>
-      <strong>Posted by:</strong>
-      <%= @post.poster %>
-    </h3>
+  <div class="row justify-content-center">
+      <h4>Posted by:</h4>
+      <p style="font-size:130%;"><%= @post.poster %></p>
+  </div>
 
-    <h5>Comments:</h5>
-    <% @post.comments.each do |comment| %>
-      <div>
-        <%= comment.body %>
-        <%= comment.commenter %>
-      </div>
-    <% end %>
+  <h4 class="text-center">Comments:</h4>
+  <% @post.comments.each do |comment| %>
+    <div class="row justify-content-center">
+      <p style="font-size:130%;"><%= comment.body %></p>
+      <p style="font-size:130%;"><%= comment.commenter %></p>
+    </div>
+  <% end %>
 
-    <h2>Add a comment:</h2>
+  <h4 class="text-center">Add a comment:</h4>
+  <div class="row justify-content-center">
     <%= form_with(model: [ @post, @post.comments.build ], local: true) do |form| %>
       <div>
-        <%= form.label :body %><br>
         <%= form.text_area :body %>
       </div>
       <div>

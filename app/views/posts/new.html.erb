@@ -50,16 +50,33 @@
 
 <div class="container">
   <div class="row justify-content-center">
-    <%= form_with scope: :post, url: posts_path, local: true do |form| %>
-      <div>
-        <%= form.label :title %><br>
-        <%= form.text_field :title %>
-      </div>
- 
-      <div>
-        <%= form.label :text %><br>
-        <%= form.text_area :text %>
-      </div>
+    <%= form_with model: post, scope: :post, url: posts_path, local: true do |form| %>
+      
+      <% invalid = post.errors.include?(:title) %>
+      <div class="form-group <%= 'has-danger' if invalid %>">
+        <%= form.label :title %>
+        <%= form.text_field :title, class: "form-control #{'border-danger' if invalid}" %>
+        <% if invalid %>
+          <div class="small">
+             <% post.errors.full_messages_for(:title).each do |error_message|%>
+                <%= error_message %>
+              <% end %>
+          </div>  
+        <% end %>
+      </div> 
+
+      <% invalid = post.errors.include?(:text) %>
+      <div class="form-group <%= 'has-danger' if invalid %>">
+        <%= form.label :text %>
+        <%= form.text_field :text, class: "form-control #{'border-danger' if invalid}" %>
+        <% if invalid %>
+          <div class="small">
+             <% post.errors.full_messages_for(:text).each do |error_message|%>
+                <%= error_message %>
+              <% end %>
+          </div>  
+        <% end %>
+      </div> 
  
       <div>
         <%= form.submit %>
