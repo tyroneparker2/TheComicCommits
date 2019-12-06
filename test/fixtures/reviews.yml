@@ -9,5 +9,12 @@
 #  updated_at :datetime         not null
 #
 
-class Review < ApplicationRecord
-end
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  text: MyText
+
+two:
+  title: MyString
+  text: MyText

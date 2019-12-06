@@ -9,5 +9,10 @@
 #  updated_at :datetime         not null
 #
 
-class Review < ApplicationRecord
+require 'test_helper'
+
+class ReviewTest < ActiveSupport::TestCase
+  # test "the truth" do
+  #   assert true
+  # end
 end

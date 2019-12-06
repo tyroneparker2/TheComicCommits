@@ -1,0 +1,21 @@
+<h1>Reviews!</h1>
+
+<%= form_with scope: :review, url: reviews_path, local: true do |form| %>
+  <p>
+    <%= form.label :review %><br>
+    <%= form.text_field :title %>
+  </p>
+ 
+  <p>
+    <%= form.label :input %><br>
+    <%= form.text_area :text %>
+  </p>
+ 
+  <p>
+    <%= form.submit %>
+  </p>
+
+
+<% end %>
+
+<%= link_to 'Back', reviews_path %>
