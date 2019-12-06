@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'discover', to: 'pages#discover', as: 'discover'
   get 'profile/:username', to: 'pages#show_profile', as: 'show_profile'
   get 'user_search', to: 'pages#user_search', as: 'user_search'
+  get 'comic_search', to: 'pages#comic_search', as: 'comic_search'
   
   get 'register', to: 'register#new_user', as: 'new_user'
   post 'create', to: 'register#create', as: 'register_create' 
@@ -22,6 +23,10 @@ Rails.application.routes.draw do
   get 'promote', to: 'session#promote', as: 'promote'
   post 'destroy', to: 'session#destroy', as: 'destroy'
   post 'delete', to: 'session#delete', as: 'delete'
+  get 'create_notification', to: 'session#create_notification', as: 'create_notification'
+  post 'follow', to: 'session#follow', as: 'follow'
+  post 'unfollow', to: 'session#unfollow', as: 'unfollow'
+  post 'read', to: 'session#read', as: 'read'
   
   get 'comic', to: 'comics#comic', as: 'comic'
   post 'edit_comic', to: 'comics#edit_comic', as: 'edit_comic'

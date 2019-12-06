@@ -1,4 +1,4 @@
-<h1 class="text-center">Profile</h1>
+<h1 class="text-center">Search for Comic</h1>
 
 <nav class="navbar navbar-dark bg-dark nav-fill nav-justified">
   
@@ -9,7 +9,7 @@
   <a class="nav-link" href="#">Forum</a>
   <%= form_with url: user_search_path, method: :get, local: true do |form| %>
     <div class="input-group">  
-      <%= search_field_tag :search, params[:search], placeholder: "Search for Users", class: "form-control" %>  
+      <%= search_field_tag :search, params[:s], placeholder: "Search for Users", class: "form-control" %>  
       <div class="input-group-btn">  
         <%= button_tag "Search", :class => 'btn btn-info glyphicon glyphicon-search',:name => nil%>  
       </div>  
@@ -26,7 +26,7 @@
       <% end %>
     </div>
   </div>
-  
+
   <div class="dropdown">
     <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       <%= current_user.username %>
@@ -48,63 +48,46 @@
   <%= button_to "Logout", destroy_path, {class:'btn btn-danger'}  %>
 </nav>
 
-<% if !current_user.bio.present?%>
-
-  <div class="container">
+<div class="container">
    <div class="row justify-content-center">
-      <%= form_with url: change_bio_path, method: :post, local: true do |form| %>
-
-         <div class="form-group">
-            <h4 class="text-center"><%= form.label :bio, "Add a Bio to Tell Users About Yourself" %></h4>
-            <%= form.text_area :bio, size: '60x5' %>
-         </div>
-
-         <div class="text-center">
-            <%= form.submit "Add" %><br>
-         </div>
-
-      <% end %>
+        <%= form_with url: comic_search_path, method: :get, local: true do |form| %>
+            <div class="input-group">  
+                <%= search_field_tag :search, params[:search], placeholder: "Search for Comics", class: "form-control" %>  
+                <div class="input-group-btn">  
+                    <%= button_tag "Search", :class => 'btn btn-info glyphicon glyphicon-search',:name => nil%>  
+                </div>
+            <%= form.select :genre, ['All', 'Superhero', 'Western', 'Humor', 'Non-ficton', 'Fantasy', 'Horror', 'Other' ] %>
+            </div>
+            <div class="form-check form-check-inline">
+                <h4>Sort By:</h4>
+            </div>
+            <div class="form-check form-check-inline">
+                <%= form.radio_button :acc_type, 'likes' %>
+                <%= form.label :type_creator, "Likes" %>
+            </div>
+            <div class="form-check form-check-inline">
+                <%= form.radio_button :acc_type, 'rating' %>
+                <%= form.label :type_critic, "Rating" %>
+            </div>
+        <%end%>
     </div>
-  </div>
-
-<% else %>
-
-  <div class="container" >
-    <h4 class="text-center">Bio</h4>
+    <h4 class = "text-center">Search Result</h4>
     <div class="row justify-content-center">
-      <p class="border border-secondary text-break text-center" style="width: 20rem;" ><%= current_user.bio %></p>
+        <% results.each do |result| %>
+            <table class="border border-dark" style="width:50%">
+                <tr>
+                    <td class="text-center">Comic Name: <%= result.title %></td>
+                </tr>
+                <tr>
+                    <td class="text-center">By: <%= name(result.user_id) %></td>
+                </tr>
+                <tr>
+                    <td class="text-center"><%= button_to 'View ', view_comic_path, method: :get, params: { title: result.title } %></td>
+                </tr>
+                <tr>
+                    <td><%= image_tag(result.cover_file, size: "600x500") %></td>
+                </tr>
+            </table>
+        <% end %>
     </div>
-  </div>
-
-<% end %>
-
-<% if current_user.group=='creator' %>
-  
-  <div class="container">
-    <h4 class="text-center">Your Comics</h4>
-    <div class="row justify-content-center">
-      <% comics.each do |comic| %>
-        <div class = "btn-group row justify-content-center">
-          <table class="border border-dark" style="width:50%">
-            <tr>
-              <td class="text-center">Comic Name: <%= comic.title %></td>
-            </tr>
-            <tr>
-              <td><%= image_tag(comic.cover_file, size: "600x500") %></td>
-            </tr>
-          </table>
-          <div class = "btn-group row justify-content-center" role="group" style="width:50%">
-            <%= button_to 'View ', view_comic_path, method: :get, params: { title: comic.title } %>
-            <%= button_to 'Edit ', edit_comic_path, params: { id: comic.id } %>
-            <%= button_to 'Delete', delete_comic_path, params: { id: comic.id } %>
-          <div>
-        </div>
-      <% end %>
-    </div>
-  </div>
-
-<% elsif current_user.group=='critic'%>
-  
-  <h4 class="text-center">Your Reviews</h4>
-
-<% end %>
+</div>

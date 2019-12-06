@@ -18,14 +18,15 @@ class ComicsController < ApplicationController
                 if params[:comic][:category] == 'series'
                     if params[:comic][:series_answer] == 'yes'
                         if params[:comic][:isbn].present?
-                            title = params[:comic][:series_name] + " #" + params[:comic][:isbn]
+                            @new_title = params[:comic][:series_name] + " #" + params[:comic][:isbn]
                             series = Series.find_by(title: params[:comic][:series_name])
                             if series && (series.user_id == current_user.id || series.user_id == 1)
                                 comic.series_id = series.id
-                                comic.title = title
+                                comic.title = @new_title
                                 if comic.save
                                     flash[:success] = "Comic saved successfully"
-                                    redirect_to profile_path
+                                    message = current_user.username + " has created a comic called " + comic.title
+                                    redirect_to create_notification_path(message: message)
                                 else
                                     flash.now[:error] = "Comic couldn't be saved"
                                     render :comic, locals: { comic: wrong }
@@ -40,15 +41,16 @@ class ComicsController < ApplicationController
                         end    
                     elsif params[:comic][:series_answer] == 'no'
                         if params[:comic][:isbn].present?
-                            title = params[:comic][:series_name] + " #" + params[:comic][:isbn]
+                            @new_title = params[:comic][:series_name] + " #" + params[:comic][:isbn]
                             series = Series.new(title: params[:comic][:series_name])
                             series.user_id = current_user.id
                             if series.save
                                 comic.series_id = series.id
-                                comic.title = title
+                                comic.title = @new_title
                                 if comic.save
-                                    flash[:success] = "Comic and Series saved successfully"
-                                    redirect_to profile_path
+                                    flash[:success] = "Series and Comic saved successfully"
+                                    message = current_user.username + " has created a comic called " + comic.title
+                                    redirect_to create_notification_path(message: message)
                                 else
                                     flash.now[:error] = "Series saved but Comic couldn't be saved"
                                     render :comic, locals: { comic: wrong }
@@ -69,7 +71,8 @@ class ComicsController < ApplicationController
                     comic.series_id = 1
                     if comic.save
                         flash[:success] = "Comic saved successfully"
-                        redirect_to profile_path
+                        message = current_user.username + " has created a comic called " + comic.title
+                        redirect_to create_notification_path(message: message)
                     else    
                         flash.now[:error] = "Comic couldn't be saved"
                         render :comic, locals: { comic: wrong } 

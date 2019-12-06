@@ -24,4 +24,6 @@ class User < ApplicationRecord
     has_many :requests, dependent: :destroy
     has_many :comics, dependent: :destroy
     has_many :series, dependent: :destroy
+    has_many :followers, dependent: :destroy
+    has_many :notifications, dependent: :destroy
 end

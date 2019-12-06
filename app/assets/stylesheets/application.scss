@@ -13,12 +13,12 @@
  *= require_tree .
  *= require_self
  */
- 
 // I have added bootstrap for you. If you want to also use a bootswatch theme, 
 // uncomment the bootswatch lines below and please change "spacelab" to one of
 // the other themes seen on their website @ https://bootswatch.com/.
 //  @import "../node_modules/bootswatch/dist/spacelab/variables";
  @import "../node_modules/bootstrap/scss/bootstrap";
+ @import "font-awesome.css";
 //  @import "../node_modules/bootswatch/dist/spacelab/bootswatch";
 body{
     background: image-url('image.jpg');

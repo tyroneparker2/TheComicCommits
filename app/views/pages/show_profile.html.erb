@@ -18,6 +18,17 @@
   
   <div class="dropdown">
     <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <%= notify.count%><i class="fa fa-bell"></i>
+    </a>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+      <% notify.each do |notification| %>
+        <%= button_to notification.message, read_path(id: notification.id), {class:'dropdown-item'}  %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="dropdown">
+    <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       <%= current_user.username %>
     </a>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -52,7 +63,15 @@
 <% if user.group=='creator' %>
   
   <div class="container">
-    <h4 class="text-center">Comics</h4>
+    <div class="row justify-content-center">
+      <h4 class="text-center">Comics</h4>
+      <% value = Follower.where(user_id: current_user, following_id: user.id)%>
+      <% if value.present? %>
+        <%= button_to 'Unfollow ', unfollow_path, params: { user: user.id } %>
+      <% else %>
+        <%= button_to 'Follow ', follow_path, params: { user: user.id } %>
+      <% end %>
+    </div>
     <div class="row justify-content-center">
       <% comics.each do |comic| %>
         <div class = "btn-group row justify-content-center">
@@ -75,7 +94,15 @@
 <% elsif user.group=='critic'%>
   
   <div class="container">
-    <h4 class="text-center">Reviews</h4>
+    <div class="row justify-content-center">
+      <h4 class="text-center">Reviews</h4>
+      <% value = Follower.where(user_id: current_user, following_id: user.id)%>
+      <% if value.present? %>
+        <%= button_to 'Unfollow ', unfollow_path, params: { user: user.id } %>
+      <% else %>
+        <%= button_to 'Follow ', follow_path, params: { user: user.id } %>
+      <% end %>
+    </div>
     <div class="row justify-content-center">
     </div>
   </div>

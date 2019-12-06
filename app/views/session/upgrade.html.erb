@@ -17,6 +17,17 @@
   <%end%>
    
    <div class="dropdown">
+    <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <%= notify.count%><i class="fa fa-bell"></i>
+    </a>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+      <% notify.each do |notification| %>
+        <%= button_to notification.message, read_path(id: notification.id), {class:'dropdown-item'}  %>
+      <% end %>
+    </div>
+  </div>
+
+   <div class="dropdown">
       <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       <%= current_user.username %>
       </a>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_24_012052) do
+ActiveRecord::Schema.define(version: 2019_12_05_032643) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,26 @@ ActiveRecord::Schema.define(version: 2019_11_24_012052) do
     t.bigint "series_id"
     t.index ["series_id"], name: "index_comics_on_series_id"
     t.index ["user_id"], name: "index_comics_on_user_id"
+  end
+
+  create_table "followers", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "following_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["following_id"], name: "index_followers_on_following_id"
+    t.index ["user_id"], name: "index_followers_on_user_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.string "message"
+    t.boolean "read"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "follower_id"
+    t.bigint "user_id"
+    t.index ["follower_id"], name: "index_notifications_on_follower_id"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -96,6 +116,10 @@ ActiveRecord::Schema.define(version: 2019_11_24_012052) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comics", "series"
   add_foreign_key "comics", "users"
+  add_foreign_key "followers", "users"
+  add_foreign_key "followers", "users", column: "following_id"
+  add_foreign_key "notifications", "followers"
+  add_foreign_key "notifications", "users"
   add_foreign_key "posts", "comics"
   add_foreign_key "posts", "users"
   add_foreign_key "requests", "users"

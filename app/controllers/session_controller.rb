@@ -44,7 +44,8 @@ class SessionController < ApplicationController
   end
 
   def profile
-    comics = Comic.where(user_id: current_user.id).all 
+    comics = Comic.where(user_id: current_user.id).all
+    comics = comics.order('created_at DESC')
     respond_to do |format|
       format.html { render :profile, locals: { comics: comics } }
     end
@@ -81,6 +82,7 @@ class SessionController < ApplicationController
 
   def promote
     requests = Request.all
+    requests = requests.order('created_at DESC')
     respond_to do |format|
       format.html { render :promote, locals: { requests: requests } }
     end
@@ -164,6 +166,40 @@ class SessionController < ApplicationController
         end
       }
     end
+  end
+
+  def create_notification
+    followers = Follower.where(following_id: current_user.id).all
+    followers.each do |follower|
+      Notification.create(follower_id: follower.id, message: params[:message], read: false, user_id: follower.user_id)
+    end
+    redirect_to profile_path
+  end
+
+  def follow
+    current = Follower.new(user_id: current_user.id, following_id: params[:user])
+    if current.save
+      flash[:success] = "Followed successfully"
+    else
+      flash[:error] = "Follow request couldn't be made"
+    end
+    redirect_back(fallback_location: profile_path)
+  end
+
+  def unfollow
+    current = Follower.find_by(user_id: current_user.id, following_id: params[:user])
+    if current.destroy
+      flash[:success] = "Unfollowed successfully"
+    else
+      flash[:error] = "unfollow request couldn't be made"
+    end   
+    redirect_back(fallback_location: profile_path) 
+  end
+
+  def read
+    notification = Notification.find(params[:id])
+    notification.update_attribute(:read, true)
+    redirect_back(fallback_location: profile_path) 
   end
 
 end
