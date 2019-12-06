@@ -10,6 +10,11 @@
     <%= form.label :input %><br>
     <%= form.text_area :text %>
   </p>
+
+  <p>
+    <%= form.label :stars%><br>
+    <%= form.number_field :stars, {min: 1, max: 5}%>
+  </p> 
  
   <p>
     <%= form.submit %>

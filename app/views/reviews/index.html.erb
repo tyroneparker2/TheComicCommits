@@ -49,9 +49,9 @@
 <%= link_to 'New review', new_review_path %>
 <table>
   <tr>
-    <th>Title</th>
-    <th>Text</th>
-    <th></th>
+    <th>Review</th>
+    <th>Input</th>
+    <th>Stars</th>
   </tr>
   
  
@@ -59,6 +59,7 @@
     <tr>
       <td><%= review.title %></td>
       <td><%= review.text %></td>
+      <td><%= review.stars%></td>
       <td><%= link_to 'Show', review_path(review) %></td>
     </tr>
   <% end %>

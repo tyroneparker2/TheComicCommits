@@ -1,11 +1,16 @@
 <p>
-  <strong>Title:</strong>
+  <strong>Review:</strong>
   <%= @review.title %>
 </p>
  
 <p>
-  <strong>Text:</strong>
+  <strong>Input:</strong>
   <%= @review.text %>
+</p>
+
+<p>
+    <strong>Rating:</strong>
+    <%= @review.stars%>
 </p>
 
 <%= link_to 'Back', reviews_path %>
