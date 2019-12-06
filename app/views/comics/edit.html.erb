@@ -1,0 +1,92 @@
+<h1 class="text-center">Edit Comic</h1>
+<nav class="navbar navbar-dark bg-dark nav-fill nav-justified">
+    <span class="navbar-brand" style="color:rgb(255, 165, 0)">Comic Commit</span>
+    <a class="nav-link" href="profile">Profile</a>
+    <a class="nav-link" href="discover">Discover</a>
+    <a class="nav-link" href="#">Review</a>
+    <a class="nav-link" href="#">Forum</a>
+    <%= form_with url: user_search_path, method: :get, local: true do |form| %>
+        <div class="input-group">  
+            <%= search_field_tag :search, params[:search], placeholder: "Search for Users", class: "form-control" %>  
+            <div class="input-group-btn">  
+                <%= button_tag "Search", :class => 'btn btn-info glyphicon glyphicon-search',:name => nil%>  
+            </div>  
+        </div>
+    <%end%>
+
+    <div class="dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <%= notify.count%><i class="fa fa-bell"></i>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <% notify.each do |notification| %>
+            <%= button_to notification.message, read_path(id: notification.id), {class:'dropdown-item'}  %>
+        <% end %>
+        </div>
+    </div>
+
+    <div class="dropdown">
+      <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <%= current_user.username %>
+      </a>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <% if current_user.group=='admin' %>
+          <a class="dropdown-item" href="promote">Requests</a>
+        <% elsif current_user.group=='creator' %>
+            <a class="dropdown-item" href="comic">Comic</a>
+        <% elsif current_user.group=='critic' %>
+            <a class="dropdown-item" href="#">Review</a>
+        <% else %>  
+          <a class="dropdown-item" href="upgrade">Upgrade</a>
+        <% end %>
+        <a class="dropdown-item" href="setting">Setting</a>
+      </div>
+    </div>
+    <%= button_to "Logout", destroy_path, {class:'btn btn-danger'}  %>
+</nav>
+
+<div class="container">
+   <div class="row justify-content-center">
+        <%= form_with model: comic, url: change_comic_path, method: :post, local: true, scope: :comic do |form| %>
+
+            <% invalid = comic.errors.include?(:title) %>
+            <div class="text-center <%= 'has-danger' if invalid %>">
+                <h4>Title</h4>
+                <%= form.text_field :title %><br>
+                <% if invalid %>
+                    <div class="small">
+                        <% comic.errors.full_messages_for(:title).each do |error_message|%>
+                            <%= error_message %>
+                        <% end %>
+                    </div>
+                <% end %>
+            </div>
+
+            <% invalid = comic.errors.include?(:genre) %>
+            <div class="text-center <%= 'has-danger' if invalid %>">
+                <h4>Genre</h4>
+                <%= form.select :genre, [ 'Superhero', 'Slice-of-Life', 'Humor', 'Non-ficton', 'Fantasy', 'Horror', 'Other' ], :prompt => 'Select a Genre' %><br>
+                <% if invalid %>
+                    <div class="small">
+                        <% comic.errors.full_messages_for(:genre).each do |error_message|%>
+                            <%= error_message %>
+                        <% end %>
+                    </div>
+                <% end %>
+            </div>  
+            
+            <div class = "text-center">
+                <h4>Front Cover Page</h4>
+                <%= image_tag(comic.cover_file, size: "600x500") %><br><br>
+                <%= form.file_field :cover_file %><br><br>
+                <h4>Comic Pages</h4>
+                <% comic.comic_file.each do |file|%>
+                    <%= image_tag(file, size: "600x500") %><br><br>
+                <% end %>
+                <%= form.file_field :comic_file, multiple: true  %><br><br>
+                <%= hidden_field_tag(:id, comic.id) %>
+                <%= form.submit "Save" %>
+            </div>  
+        <% end %><br>
+    </div>
+</div>

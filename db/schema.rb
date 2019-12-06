@@ -38,12 +38,14 @@ ActiveRecord::Schema.define(version: 2019_12_06_163726) do
 
   create_table "comics", force: :cascade do |t|
     t.string "title"
-    t.string "comic_file"
     t.string "isbn"
     t.string "genre"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "category"
     t.bigint "user_id"
+    t.bigint "series_id"
+    t.index ["series_id"], name: "index_comics_on_series_id"
     t.index ["user_id"], name: "index_comics_on_user_id"
   end
 
@@ -56,17 +58,24 @@ ActiveRecord::Schema.define(version: 2019_12_06_163726) do
     t.index ["post_id"], name: "index_comments_on_post_id"
   end
 
-  create_table "follows", force: :cascade do |t|
+  create_table "followers", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "following_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "following_id"
-    t.integer "follower"
-    t.index ["following_id"], name: "index_follows_on_following_id"
+    t.index ["following_id"], name: "index_followers_on_following_id"
+    t.index ["user_id"], name: "index_followers_on_user_id"
   end
 
-  create_table "likes", force: :cascade do |t|
+  create_table "notifications", force: :cascade do |t|
+    t.string "message"
+    t.boolean "read"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "follower_id"
+    t.bigint "user_id"
+    t.index ["follower_id"], name: "index_notifications_on_follower_id"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -76,6 +85,7 @@ ActiveRecord::Schema.define(version: 2019_12_06_163726) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "comic_id"
     t.bigint "user_id"
+    t.string "username"
     t.string "poster"
     t.index ["comic_id"], name: "index_posts_on_comic_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
@@ -96,10 +106,18 @@ ActiveRecord::Schema.define(version: 2019_12_06_163726) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "stars"
-    t.bigint "user_id"
+    t.bigint "user_id", null: false
     t.bigint "comic_id"
     t.index ["comic_id"], name: "index_reviews_on_comic_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
+  create_table "series", force: :cascade do |t|
+    t.string "title"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_series_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -117,12 +135,16 @@ ActiveRecord::Schema.define(version: 2019_12_06_163726) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "comics", "series"
   add_foreign_key "comics", "users"
   add_foreign_key "comments", "posts"
-  add_foreign_key "follows", "users", column: "following_id"
+  add_foreign_key "followers", "users"
+  add_foreign_key "followers", "users", column: "following_id"
+  add_foreign_key "notifications", "followers"
+  add_foreign_key "notifications", "users"
   add_foreign_key "posts", "comics"
   add_foreign_key "posts", "users"
   add_foreign_key "requests", "users"
-  add_foreign_key "reviews", "comics"
   add_foreign_key "reviews", "users"
+  add_foreign_key "series", "users"
 end

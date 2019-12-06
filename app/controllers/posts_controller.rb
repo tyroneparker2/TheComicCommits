@@ -13,19 +13,30 @@ class PostsController < ApplicationController
   end
 
   def new
+    post = Post.new
+    respond_to do |format|
+      format.html { render :new, locals: { post: post } }
+    end
   end
 
     def create
-        @post = Post.new(post_params)
-        @post.user_id = current_user.id
-        @post.poster = current_user.username
-       
-        @post.save
-        redirect_to @post
+      @post = Post.new(post_params)
+      post = @post
+      @post.user_id = current_user.id
+      @post.poster = current_user.username
+      respond_to do |format|
+        format.html {
+          if @post.save
+            flash[:success] = "Post saved successfully"
+            redirect_to @post
+          else
+            flash.now[:error] = "Post could not be saved" 
+            render :new, locals: { post: post } 
+          end
+        }
+      end 
     end
-    
-   
-
+       
   def index
      @posts = Post.all
   end

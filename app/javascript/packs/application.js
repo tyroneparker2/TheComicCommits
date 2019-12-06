@@ -23,3 +23,23 @@ document.addEventListener("turbolinks:load", () => {
   $('[data-toggle="tooltip"]').tooltip()
   $('[data-toggle="popover"]').popover()
 })
+
+$(document).on('turbolinks:load',function(){
+
+  $("#series").hide();
+  $("#one_shot").hide();
+  $("input:radio").change(function(){  
+    
+          if(this.value == 'series' && this.checked){
+            $("#one_shot").hide();
+            $("#series").show();
+          }else if(this.value == 'one-shot' && this.checked){
+            $("#series").hide();
+            $("#one_shot").show();
+          }else{
+            
+          }
+
+  });
+
+});
