@@ -15,9 +15,17 @@ Rails.application.routes.draw do
   get 'upgrade', to: 'session#upgrade', as: 'upgrade'
   get 'promote', to: 'session#promote', as: 'promote'
   post 'destroy', to: 'session#destroy', as: 'destroy'
+
   get 'comic', to: 'session#comic', as: 'comic'
   post 'set_comic', to: 'session#set_comic', as: 'set_comic'
   post 'delete', to: 'session#delete', as: 'delete'
+<<<<<<< HEAD
   get 'review', to: 'static_pages#review', as: 'review'
   post 'review', to: 'static_pages#leave_review', as: 'leave_review'
+=======
+
+  resources :posts do 
+    resources :comments
+  end
+>>>>>>> c66d8213890ad4ea4e521ff41de73152a9b3abc2
 end

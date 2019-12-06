@@ -1,14 +1,33 @@
 # Video Report
 
-- Project: (Nickname of Project)
-- Milestone: (Milestone ID; e.g., M1)
-- Demo Video: (URL for demo video; e.g., <https://youtu.be/xxx>)
+- Project: (TheComicCommits)
+- Milestone: (Milestone 1 (M1))
+- Demo Video: (https://youtu.be/xOYk41fBS_s)
 
-## Who Did What
 
-| Time Offset  | (Offset into Video; e.g., hh:mm:ss; sort sequentially) |
+
+| Time Offset  | ( 00:00:03-00:00:55) |
 | ------------ | ----- |
-| Contributor  | (Team Member Name) |
-| Contribution | (Brief description of work on display) |
-| Pull Request | (PR URL(s) for the submitted work; e.g., <http://xxx>; comma-separated list if multiple pull requests) |
+| Contributor  | (Brandon Smith) |
+| Contribution | (The creation of the sites homepage, what you see at the beginning of the video. This page also displayed the Highest Rated Comic.) |
+| Pull Request | (https://github.com/memphis-cs-projects/TheComicCommits/pull/10) |
+
+| Time Offset  | (00:00:56-00:05:36) |
+| ------------ | ----- |
+| Contributor  | (Tyrone Parker) |
+| Contribution | (He created the sign-up and login pages, as well as being able to validate fans (users) as admin, creators, or critics.) |
+| Pull Request | (https://github.com/memphis-cs-projects/TheComicCommits/pull/9) |
+
+| Time Offset  | (00:05:37-00:06:12) |
+| ------------ | ----- |
+| Contributor  | (Chandler Lambert) |
+| Contribution | (He created the page in which the user will be able to create a comic book and publish it on the site.) |
+| Pull Request | (https://github.com/memphis-cs-projects/TheComicCommits/pull/14) |
+
+| Time Offset  | (00:06:13-00:07:49) |
+| ------------ | ----- |
+| Contributor  | (Tyrone Parker) |
+| Contribution | (He created a tab underneath the user where the user can change his email, password, or delete his account entirely.) |
+| Pull Request | (https://github.com/memphis-cs-projects/TheComicCommits/pull/12) |
+
 

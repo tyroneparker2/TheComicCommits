@@ -1,22 +1,19 @@
 # == Schema Information
 #
-# Table name: posts
+# Table name: comments
 #
 #  id         :integer          not null, primary key
-#  type       :string
-#  text       :text
-#  rating     :integer
-#  replied_to :integer
+#  body       :text
+#  post_id    :integer          not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  comic_id   :integer
-#  user_id    :integer
+#  commenter  :string
 #
 # Indexes
 #
-#  index_posts_on_comic_id  (comic_id)
-#  index_posts_on_user_id   (user_id)
+#  index_comments_on_post_id  (post_id)
 #
 
-class Comment < Post
+class Comment < ApplicationRecord
+  belongs_to :post
 end
