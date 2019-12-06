@@ -5,12 +5,7 @@ class SessionController < ApplicationController
     respond_to do |format|
       format.html { render :login, locals: { user: user } }
     end
-  end
-  
-  def comic
-    respond_to do |format|
-      format.html{ render :comic }
-    end
+    
   end
 
   def create
@@ -41,11 +36,18 @@ class SessionController < ApplicationController
     session[:user_id] = nil 
     flash[:success] = "Account was Deleted"  
     redirect_to login_path  
-  end 
+  end
+  
+  def delete_comic   
+    flash[:success] = "Comic was Deleted"  
+    redirect_to profile_path  
+  end
 
   def profile
+    comics = Comic.where(user_id: current_user.id).all
+    comics = comics.order('created_at DESC')
     respond_to do |format|
-      format.html { render :profile }
+      format.html { render :profile, locals: { comics: comics } }
     end
   end
 
@@ -80,6 +82,7 @@ class SessionController < ApplicationController
 
   def promote
     requests = Request.all
+    requests = requests.order('created_at DESC')
     respond_to do |format|
       format.html { render :promote, locals: { requests: requests } }
     end
@@ -109,22 +112,6 @@ class SessionController < ApplicationController
     end
   end
 
-  def set_comic
-    user = User.find(current_user.id)
-    user.comic_file.purge 
-    user.comic_file.attach(params[:comic_file])
-    respond_to do |format|
-      format.html {
-        if user.save
-          flash.now[:success] = "Comic saved successfully"
-        else
-          flash.now[:error] = "Request didn't saved successfully"
-        end
-        render :comic
-      }
-      end  
-  end
-
   def change_email
     user = User.find(current_user.id)
     respond_to do |format|
@@ -141,6 +128,22 @@ class SessionController < ApplicationController
           flash[:error] = "Invalid Current Email"
           redirect_to setting_path
         end
+      }
+    end
+  end
+
+  def change_bio
+    user = User.find(current_user.id)
+    user.bio = params[:bio]
+    respond_to do |format|
+      format.html {
+        if params[:bio].present? && user.save 
+          flash[:success] = "Bio saved successfully"
+          redirect_to profile_path
+        else
+          flash[:error] = "Bio could not be saved"
+          redirect_to setting_path
+        end    
       }
     end
   end
@@ -163,6 +166,40 @@ class SessionController < ApplicationController
         end
       }
     end
+  end
+
+  def create_notification
+    followers = Follower.where(following_id: current_user.id).all
+    followers.each do |follower|
+      Notification.create(follower_id: follower.id, message: params[:message], read: false, user_id: follower.user_id)
+    end
+    redirect_to profile_path
+  end
+
+  def follow
+    current = Follower.new(user_id: current_user.id, following_id: params[:user])
+    if current.save
+      flash[:success] = "Followed successfully"
+    else
+      flash[:error] = "Follow request couldn't be made"
+    end
+    redirect_back(fallback_location: profile_path)
+  end
+
+  def unfollow
+    current = Follower.find_by(user_id: current_user.id, following_id: params[:user])
+    if current.destroy
+      flash[:success] = "Unfollowed successfully"
+    else
+      flash[:error] = "unfollow request couldn't be made"
+    end   
+    redirect_back(fallback_location: profile_path) 
+  end
+
+  def read
+    notification = Notification.find(params[:id])
+    notification.update_attribute(:read, true)
+    redirect_back(fallback_location: profile_path) 
   end
 
 end

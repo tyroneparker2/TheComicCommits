@@ -1,29 +1,34 @@
-<center>
-<font color="blue">
-<h1>Comic Nook</h1>
-</font>
-<h4>Created by The Comic Commits</h4>
-</center>
+<h1 class="text-center">Comic Nook</h1>
+<h4 class="text-center text-body">Created by The Comic Commits</h4>
 <nav class="navbar navbar-dark bg-dark nav-fill nav-justified">
 
     <span class="navbar-brand" style="color:rgb(255, 165, 0)">Comic Commit</span>
-
     <a class="nav-link" href="profile">Profile</a>
-
-    <a class="nav-link" href="#">Discover</a>
-
+    <a class="nav-link" href="discover">Discover</a>
     <a class="nav-link" href="#">Review</a>
-
-    <a class="nav-link" href="http://localhost:3000/posts">Forum</a>
-
-    <form class="form-inline">
-
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-
-    </form>
+    <a class="nav-link" href="posts">Forum</a>
+    <%= form_with url: user_search_path, method: :get, local: true do |form| %>
+      <div class="input-group">  
+        <%= search_field_tag :search, params[:search], placeholder: "Search for Users", class: "form-control" %>  
+        <div class="input-group-btn">  
+          <%= button_tag "Search", :class => 'btn btn-info glyphicon glyphicon-search',:name => nil%>  
+        </div>  
+      </div>
+    <%end%>
+    
     <% if logged_in? %>
+
+        <div class="dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <%= notify.count%><i class="fa fa-bell"></i>
+            </a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <% notify.each do |notification| %>
+              <%= button_to notification.message, read_path(id: notification.id), {class:'dropdown-item'}  %>
+            <% end %>
+          </div>
+        </div>
+    
        <div class="dropdown">
         <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <%= current_user.username %>
@@ -32,7 +37,7 @@
           <% if current_user.group=='admin' %>
             <a class="dropdown-item" href="promote">Requests</a>
           <% elsif current_user.group=='creator' %>
-            <a class="dropdown-item" href="#">Comic</a>
+            <a class="dropdown-item" href="comic">Comic</a>
           <% elsif current_user.group=='critic' %>
             <a class="dropdown-item" href="#">Review</a>
           <% else %>  
@@ -49,39 +54,35 @@
     <%end%>  
 
 </nav>
-<center>
-<br>
-<h3> Highest Rated Comic </h3>
- <%= image_tag "Mutiny.png", height: 300 %>
- </center>
-<br>
-<br>
-<br>
- <h2>Why Comic Nook?</h2>
 
- <h4>
-   Fans may:
- </h4>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="text-center">
+    <h3> Highest Rated Comic </h3>
+    <%= image_tag "Mutiny.png", height: 300 %>
+    <h2 >Why Comic Nook?</h2>
+    <h4 class="text-center">Fans may:</h4>
 
- <ul>
-   <li>Browse Comics by genre, rating, creator, and more</li>
-   <li>Read Comics</li>
-   <li>Discuss your favorite comics in the Comic Nook forums</li>
-   <li>Rate Comics and see how others rated them</li>
- </ul>
+    <ul class="text-center">
+      <li>Browse Comics by genre, rating, creator, and more</li>
+      <li>Read Comics</li>
+      <li>Discuss your favorite comics in the Comic Nook forums</li>
+      <li>Rate Comics and see how others rated them</li>
+    </ul>
 
-  <p>
-   In addition to the fan account, register a creator or critic account to get these features:
- </p>
-
- <ul>
-   <li>Critics</li>
-   <ul>
+    <p>
+    In addition to the fan account, register a creator or critic account to get these features:
+    </p>
+    <ul>
+      <li><b>Critics</b></li>
+      <ul>
         <li>Post recommended comics on your profile page</li>
         <li>Ratings will be included in critic rating</li>
-   </ul>
-   <li>Creators</li>
+      </ul>
+      <li><b>Creators</b></li>
       <ul>
         <li>Create and Upload your own Comics!</li>
-   </ul>
- </ul>
+      </ul>
+    </ul>
+  </div>
+</div>

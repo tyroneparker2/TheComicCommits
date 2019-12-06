@@ -1,85 +1,86 @@
-<center>
+<h1 class="text-center">Post</h1>
 
 <nav class="navbar navbar-dark bg-dark nav-fill nav-justified">
+  
+  <span class="navbar-brand" style="color:rgb(255, 165, 0)">Comic Commit</span>
+  <a class="nav-link" href="/profile">Profile</a>
+  <a class="nav-link" href="/discover">Discover</a>
+  <a class="nav-link" href="#">Review</a>
+  <a class="nav-link" href="/posts">Forum</a>
+  <%= form_with url: user_search_path, method: :get, local: true do |form| %>
+    <div class="input-group">  
+      <%= search_field_tag :search, params[:search], placeholder: "Search for Users", class: "form-control" %>  
+      <div class="input-group-btn">  
+        <%= button_tag "Search", :class => 'btn btn-info glyphicon glyphicon-search',:name => nil%>  
+      </div>  
+    </div>
+  <%end%>
+  
+  <div class="dropdown">
+    <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <%= notify.count%><i class="fa fa-bell"></i>
+    </a>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+      <% notify.each do |notification| %>
+        <%= button_to notification.message, read_path(id: notification.id), {class:'dropdown-item'}  %>
+      <% end %>
+    </div>
+  </div>
 
-    <span class="navbar-brand" style="color:rgb(255, 165, 0)">Comic Commit</span>
-
-    <a class="nav-link" href="profile">Profile</a>
-
-    <a class="nav-link" href="#">Discover</a>
-
-    <a class="nav-link" href="#">Review</a>
-
-    <a class="nav-link" href="http://localhost:3000/posts">Forum</a>
-
-    <form class="form-inline">
-
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-
-    </form>
-    <% if logged_in? %>
-       <div class="dropdown">
-        <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <%= current_user.username %>
-        </a>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <% if current_user.group=='admin' %>
-            <a class="dropdown-item" href="promote">Requests</a>
-          <% elsif current_user.group=='creator' %>
-            <a class="dropdown-item" href="#">Comic</a>
-          <% elsif current_user.group=='critic' %>
-            <a class="dropdown-item" href="#">Review</a>
-          <% else %>  
-            <a class="dropdown-item" href="upgrade">Upgrade</a>
-          <% end %>
-          <a class="dropdown-item" href="setting">Setting</a>
-        </div>
-      </div>
+  <div class="dropdown">
+    <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <%= current_user.username %>
+    </a>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+      <% if current_user.group=='admin' %>
+        <a class="dropdown-item" href="/promote">Requests</a>
+      <% elsif current_user.group=='creator' %>
+          <a class="dropdown-item" href="/comic">Comic</a>
+      <% elsif current_user.group=='critic' %>
+          <a class="dropdown-item" href="#">Review</a>
+      <% else %>  
+        <a class="dropdown-item" href="/upgrade">Upgrade</a>
+      <% end %>
+      <a class="dropdown-item" href="/setting">Setting</a>
+    </div>
+  </div>
 
   <%= button_to "Logout", destroy_path, {class:'btn btn-danger'}  %>
-    <% else %>
-      <a class="nav-link" href="register">Sign Up</a>
-      <a class="nav-link" href="login">Login</a>
-    <%end%>  
-
 </nav>
 
-<h2>
-  <strong>Title:</strong>
-  <%= @post.title %>
-</h2>
+<div class="container">
+  <div class="row justify-content-center">
+    <h4>Title: </h4>
+    <p style="font-size:130%;"><%= @post.title %></p>
+  </div>
  
-<h3>
-  <strong>Text:</strong>
-  <%= @post.text %>
-</h3>
+  <div class="row justify-content-center">
+    <h4>Text:</h4>
+    <p style="font-size:130%;"><%= @post.text %></p>
+  </div>
 
-<h3>
-  <strong>Posted by:</strong>
-  <%= @post.poster %>
-</h3>
+  <div class="row justify-content-center">
+      <h4>Posted by:</h4>
+      <p style="font-size:130%;"><%= @post.poster %></p>
+  </div>
 
-<h5>Comments:</h5>
-<% @post.comments.each do |comment| %>
-  <p>
-    <%= comment.body %>
-    <%= comment.commenter %>
-  </p>
-<% end %>
+  <h4 class="text-center">Comments:</h4>
+  <% @post.comments.each do |comment| %>
+    <div class="row justify-content-center">
+      <p style="font-size:130%;"><%= comment.body %></p>
+      <p style="font-size:130%;"><%= comment.commenter %></p>
+    </div>
+  <% end %>
 
-<h2>Add a comment:</h2>
-<%= form_with(model: [ @post, @post.comments.build ], local: true) do |form| %>
-  <p>
-    <%= form.label :body %><br>
-    <%= form.text_area :body %>
-  </p>
-  <p>
-    <%= form.submit %>
-  </p>
-<% end %>
-
-<p><%= link_to 'Go Back To Forum ', posts_path(@post) %></p>
-
-</center>
+  <h4 class="text-center">Add a comment:</h4>
+  <div class="row justify-content-center">
+    <%= form_with(model: [ @post, @post.comments.build ], local: true) do |form| %>
+      <div>
+        <%= form.text_area :body %>
+      </div>
+      <div>
+        <%= form.submit %>
+      </div>
+    <% end %>
+  </div>
+</div>
