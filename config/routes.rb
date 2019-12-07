@@ -22,6 +22,14 @@ Rails.application.routes.draw do
   get 'upgrade', to: 'session#upgrade', as: 'upgrade'
   get 'promote', to: 'session#promote', as: 'promote'
   post 'destroy', to: 'session#destroy', as: 'destroy'
+  
+  #get 'comic', to: 'session#comic', as: 'comic'
+  #post 'set_comic', to: 'session#set_comic', as: 'set_comic'
+  #post 'delete', to: 'session#delete', as: 'delete'
+  
+  resources :reviews
+
+  
   post 'delete', to: 'session#delete', as: 'delete'
   get 'create_notification', to: 'session#create_notification', as: 'create_notification'
   post 'follow', to: 'session#follow', as: 'follow'
